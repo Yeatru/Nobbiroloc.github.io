@@ -1,0 +1,107 @@
+{
+  "common": {
+    "home": "Главная",
+    "products": "Товары",
+    "articles": "Статьи",
+    "support": "Поддержка",
+    "contact": "Связаться с нами",
+    "search": "Поиск",
+    "submit": "Отправить",
+    "cancel": "Отмена",
+    "confirm": "Подтвердить",
+    "save": "Сохранить"
+  },
+  "header": {
+    "logo": "3D Магазин",
+    "searchPlaceholder": "Поиск товаров...",
+    "cart": "Корзина",
+    "login": "Вход",
+    "register": "Регистрация",
+    "logout": "Выход",
+    "profile": "Профиль"
+  },
+  "footer": {
+    "about": "О нас",
+    "privacy": "Политика конфиденциальности",
+    "terms": "Условия использования",
+    "help": "Центр помощи",
+    "copyright": "Все права защищены"
+  },
+  "product": {
+    "name": "Название товара",
+    "price": "Цена",
+    "description": "Описание",
+    "specs": "Характеристики",
+    "stock": "Наличие",
+    "addCart": "Добавить в корзину",
+    "buyNow": "Купить сейчас",
+    "compare": "Добавить к сравнению",
+    "category": "Категория",
+    "subCategory": "Подкатегория",
+    "features": "Особенности",
+    "applications": "Применение",
+    "reviews": "Отзывы"
+  },
+  "cart": {
+    "title": "Корзина",
+    "empty": "Ваша корзина пуста",
+    "remove": "Удалить",
+    "updateQty": "Обновить количество",
+    "checkout": "Оформить заказ",
+    "total": "Итого",
+    "quantity": "Количество"
+  },
+  "user": {
+    "loginTitle": "Вход",
+    "registerTitle": "Регистрация",
+    "username": "Имя пользователя",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердить пароль",
+    "email": "Email",
+    "phone": "Телефон",
+    "forgotPassword": "Забыли пароль?",
+    "noAccount": "Нет аккаунта?",
+    "hasAccount": "Уже есть аккаунт?",
+    "profile": "Профиль",
+    "orders": "Мои заказы",
+    "favorites": "Избранное",
+    "settings": "Настройки аккаунта"
+  },
+  "order": {
+    "title": "Управление заказами",
+    "orderNo": "Номер заказа",
+    "createTime": "Дата создания",
+    "status": "Статус",
+    "totalPrice": "Общая сумма",
+    "detail": "Посмотреть детали",
+    "pending": "Ожидает оплаты",
+    "paid": "Оплачен",
+    "shipped": "Отправлен",
+    "completed": "Завершен",
+    "cancelled": "Отменен"
+  },
+  "article": {
+    "title": "Новости",
+    "readMore": "Читать далее",
+    "author": "Автор",
+    "publishTime": "Дата публикации",
+    "views": "Просмотры",
+    "category": "Категория"
+  },
+  "support": {
+    "title": "Поддержка",
+    "faq": "Вопросы и ответы",
+    "contact": "Связаться с нами",
+    "service": "Послепродажное обслуживание",
+    "phone": "Телефон поддержки",
+    "email": "Email",
+    "address": "Адрес"
+  },
+  "language": {
+    "zh": "中文",
+    "en": "English",
+    "fr": "Français",
+    "ru": "Русский",
+    "es": "Español"
+  }
+}

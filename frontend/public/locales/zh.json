@@ -1,0 +1,107 @@
+{
+  "common": {
+    "home": "首页",
+    "products": "产品中心",
+    "articles": "资讯中心",
+    "support": "服务支持",
+    "contact": "联系我们",
+    "search": "搜索",
+    "submit": "提交",
+    "cancel": "取消",
+    "confirm": "确认",
+    "save": "保存"
+  },
+  "header": {
+    "logo": "3D打印商城",
+    "searchPlaceholder": "搜索产品...",
+    "cart": "购物车",
+    "login": "登录",
+    "register": "注册",
+    "logout": "退出登录",
+    "profile": "个人中心"
+  },
+  "footer": {
+    "about": "关于我们",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "help": "帮助中心",
+    "copyright": "版权所有"
+  },
+  "product": {
+    "name": "产品名称",
+    "price": "价格",
+    "description": "产品描述",
+    "specs": "技术参数",
+    "stock": "库存",
+    "addCart": "加入购物车",
+    "buyNow": "立即购买",
+    "compare": "加入对比",
+    "category": "产品分类",
+    "subCategory": "子分类",
+    "features": "产品特点",
+    "applications": "应用场景",
+    "reviews": "用户评价"
+  },
+  "cart": {
+    "title": "购物车",
+    "empty": "购物车为空",
+    "remove": "删除",
+    "updateQty": "更新数量",
+    "checkout": "去结算",
+    "total": "总计",
+    "quantity": "数量"
+  },
+  "user": {
+    "loginTitle": "用户登录",
+    "registerTitle": "用户注册",
+    "username": "用户名",
+    "password": "密码",
+    "confirmPassword": "确认密码",
+    "email": "邮箱",
+    "phone": "手机号",
+    "forgotPassword": "忘记密码?",
+    "noAccount": "还没有账号?",
+    "hasAccount": "已有账号?",
+    "profile": "个人信息",
+    "orders": "我的订单",
+    "favorites": "我的收藏",
+    "settings": "账户设置"
+  },
+  "order": {
+    "title": "订单管理",
+    "orderNo": "订单编号",
+    "createTime": "创建时间",
+    "status": "订单状态",
+    "totalPrice": "订单金额",
+    "detail": "查看详情",
+    "pending": "待付款",
+    "paid": "已付款",
+    "shipped": "已发货",
+    "completed": "已完成",
+    "cancelled": "已取消"
+  },
+  "article": {
+    "title": "资讯中心",
+    "readMore": "阅读更多",
+    "author": "作者",
+    "publishTime": "发布时间",
+    "views": "浏览量",
+    "category": "分类"
+  },
+  "support": {
+    "title": "服务支持",
+    "faq": "常见问题",
+    "contact": "联系我们",
+    "service": "售后服务",
+    "phone": "服务热线",
+    "email": "邮箱",
+    "address": "地址"
+  },
+  "language": {
+    "zh": "中文",
+    "en": "English",
+    "fr": "Français",
+    "ru": "Русский",
+    "es": "Español"
+  }
+}
