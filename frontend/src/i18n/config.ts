@@ -19,9 +19,9 @@ i18n
       caches: ['localStorage', 'cookie'],
     },
     backend: {
-    loadPath: '/locales/{{lng}}.json',
-    crossDomain: false,
-  },
+      loadPath: './locales/{{lng}}.json',
+      crossDomain: false,
+    },
   })
 
 export default i18n
