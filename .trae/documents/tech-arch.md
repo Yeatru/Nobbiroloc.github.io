@@ -60,6 +60,10 @@ graph TB
 | TailwindCSS | 3.x | CSS框架 |
 | Lucide React | 0.x | 图标库 |
 | Axios | 1.x | HTTP客户端 |
+| i18next | 23.x | 国际化框架 |
+| react-i18next | 13.x | React国际化 |
+| i18next-http-backend | 2.x | 加载翻译文件 |
+| i18next-browser-languagedetector | 7.x | 语言检测 |
 
 ### 2.2 目录结构
 
@@ -67,10 +71,11 @@ graph TB
 frontend/
 ├── src/
 │   ├── components/          # 通用组件
-│   │   ├── Header/         # 页头导航
+│   │   ├── Header/         # 页头导航（含语言切换）
 │   │   ├── Footer/         # 页脚
 │   │   ├── ProductCard/    # 产品卡片
-│   │   └── ArticleCard/    # 资讯卡片
+│   │   ├── ArticleCard/    # 资讯卡片
+│   │   └── LanguageSwitch/ # 语言切换组件
 │   ├── pages/              # 页面组件
 │   │   ├── Home/           # 首页
 │   │   ├── Products/       # 产品中心
@@ -79,6 +84,7 @@ frontend/
 │   │   └── Support/        # 服务支持
 │   ├── store/              # Redux状态管理
 │   │   ├── slices/         # 状态切片
+│   │   │   └── i18n.ts     # 语言状态管理
 │   │   └── index.ts        # Store配置
 │   ├── api/                # API调用
 │   │   ├── products.ts     # 产品相关API
@@ -86,6 +92,14 @@ frontend/
 │   │   └── users.ts        # 用户相关API
 │   ├── types/              # TypeScript类型定义
 │   ├── utils/              # 工具函数
+│   ├── i18n/               # 国际化配置
+│   │   ├── config.ts       # i18n配置
+│   │   └── locales/        # 翻译文件目录
+│   │       ├── en.json     # 英文翻译
+│   │       ├── zh.json     # 中文翻译
+│   │       ├── fr.json     # 法语翻译
+│   │       ├── ru.json     # 俄语翻译
+│   │       └── es.json     # 西班牙语翻译
 │   └── App.tsx             # 根组件
 ├── public/                 # 静态资源
 ├── package.json
@@ -102,8 +116,66 @@ frontend/
 | cart | 购物车商品 | addToCart, removeFromCart, updateQuantity |
 | user | 用户信息、登录状态 | login, logout, updateProfile |
 | articles | 资讯列表 | fetchArticles |
+| i18n | 当前语言、语言列表 | setLanguage, getLanguage |
 
-### 2.4 页面路由
+### 2.4 国际化设计
+
+#### 2.4.1 支持语言
+
+| 语言代码 | 语言名称 | 语言标识 |
+| :--- | :--- | :--- |
+| zh-CN | 简体中文 | 中文 |
+| en-US | English | English |
+| fr-FR | Français | Français |
+| ru-RU | Русский | Русский |
+| es-ES | Español | Español |
+
+#### 2.4.2 翻译文件结构
+
+翻译文件采用JSON格式，按功能模块组织：
+
+```json
+{
+  "common": {
+    "home": "首页",
+    "products": "产品中心",
+    "articles": "资讯中心",
+    "support": "服务支持",
+    "contact": "联系我们"
+  },
+  "header": {
+    "search": "搜索产品",
+    "cart": "购物车",
+    "login": "登录",
+    "logout": "退出登录"
+  },
+  "product": {
+    "name": "产品名称",
+    "price": "价格",
+    "description": "产品描述",
+    "specs": "技术参数"
+  }
+}
+```
+
+#### 2.4.3 i18n配置说明
+
+**i18n/config.ts** 主要配置：
+- `fallbackLng`: 默认语言（中文）
+- `supportedLngs`: 支持的语言列表
+- `interpolation`: 变量插值配置
+- `detection`: 语言检测策略（浏览器语言、localStorage、URL参数）
+- `backend`: 翻译文件加载配置
+
+#### 2.4.4 语言切换组件
+
+语言切换组件 `LanguageSwitch` 功能：
+- 显示当前语言标识
+- 下拉菜单选择目标语言
+- 切换时更新localStorage和Redux状态
+- 重新加载当前页面内容
+
+### 2.5 页面路由
 
 | 路径 | 组件 | 说明 |
 | :--- | :--- | :--- |

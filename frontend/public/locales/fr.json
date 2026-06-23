@@ -1,0 +1,107 @@
+{
+  "common": {
+    "home": "Accueil",
+    "products": "Produits",
+    "articles": "Articles",
+    "support": "Support",
+    "contact": "Contactez-nous",
+    "search": "Rechercher",
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "save": "Enregistrer"
+  },
+  "header": {
+    "logo": "Magasin 3D",
+    "searchPlaceholder": "Rechercher des produits...",
+    "cart": "Panier",
+    "login": "Connexion",
+    "register": "Inscription",
+    "logout": "Déconnexion",
+    "profile": "Profil"
+  },
+  "footer": {
+    "about": "À propos de nous",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "help": "Centre d'aide",
+    "copyright": "Tous droits réservés"
+  },
+  "product": {
+    "name": "Nom du produit",
+    "price": "Prix",
+    "description": "Description",
+    "specs": "Spécifications",
+    "stock": "Stock",
+    "addCart": "Ajouter au panier",
+    "buyNow": "Acheter maintenant",
+    "compare": "Ajouter à la comparaison",
+    "category": "Catégorie",
+    "subCategory": "Sous-catégorie",
+    "features": "Caractéristiques",
+    "applications": "Applications",
+    "reviews": "Avis"
+  },
+  "cart": {
+    "title": "Panier",
+    "empty": "Votre panier est vide",
+    "remove": "Supprimer",
+    "updateQty": "Mettre à jour la quantité",
+    "checkout": "Passer la commande",
+    "total": "Total",
+    "quantity": "Quantité"
+  },
+  "user": {
+    "loginTitle": "Connexion",
+    "registerTitle": "Inscription",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "email": "Email",
+    "phone": "Téléphone",
+    "forgotPassword": "Mot de passe oublié?",
+    "noAccount": "Pas de compte?",
+    "hasAccount": "Déjà un compte?",
+    "profile": "Profil",
+    "orders": "Mes commandes",
+    "favorites": "Mes favoris",
+    "settings": "Paramètres du compte"
+  },
+  "order": {
+    "title": "Gestion des commandes",
+    "orderNo": "Numéro de commande",
+    "createTime": "Date de création",
+    "status": "Statut",
+    "totalPrice": "Montant total",
+    "detail": "Voir les détails",
+    "pending": "En attente",
+    "paid": "Payé",
+    "shipped": "Expédié",
+    "completed": "Terminé",
+    "cancelled": "Annulé"
+  },
+  "article": {
+    "title": "Centre d'actualités",
+    "readMore": "Lire la suite",
+    "author": "Auteur",
+    "publishTime": "Date de publication",
+    "views": "Vues",
+    "category": "Catégorie"
+  },
+  "support": {
+    "title": "Support",
+    "faq": "FAQ",
+    "contact": "Contactez-nous",
+    "service": "Service après-vente",
+    "phone": "Ligne d'assistance",
+    "email": "Email",
+    "address": "Adresse"
+  },
+  "language": {
+    "zh": "中文",
+    "en": "English",
+    "fr": "Français",
+    "ru": "Русский",
+    "es": "Español"
+  }
+}
