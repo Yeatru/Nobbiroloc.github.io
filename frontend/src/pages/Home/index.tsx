@@ -1,37 +1,18 @@
-import { useState, useEffect } from 'react'
 import { Carousel, Row, Col, Button, Typography } from 'antd'
 import { ArrowRight, Printer, Layers, Zap, Award } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import ProductCard from '@/components/ProductCard'
 import ArticleCard from '@/components/ArticleCard'
 import { useTranslation } from '@/hooks/useTranslation'
-import { getProducts } from '@/api/products'
-import { getArticles } from '@/api/articles'
-import type { Product, Article } from '@/types'
+import { mockProducts, mockArticles } from '@/data'
 
 const { Title, Paragraph } = Typography
 
 const Home = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const [products, setProducts] = useState<Product[]>([])
-  const [articles, setArticles] = useState<Article[]>([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [productData, articleData] = await Promise.all([
-          getProducts(),
-          getArticles(),
-        ])
-        setProducts(productData.slice(0, 4))
-        setArticles(articleData.slice(0, 3))
-      } catch (error) {
-        console.error('Failed to fetch data:', error)
-      }
-    }
-    fetchData()
-  }, [])
+  const products = mockProducts.slice(0, 4)
+  const articles = mockArticles.slice(0, 3)
 
   const features = [
     { icon: Printer, title: t('common.products'), description: '高品质3D打印设备' },

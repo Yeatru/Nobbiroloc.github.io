@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Row, Col, Button, Typography, Image, Tag, Descriptions } from 'antd'
 import { ShoppingCart, ArrowLeft } from 'lucide-react'
 import { useTranslation } from '@/hooks/useTranslation'
-import { getProductById } from '@/api/products'
+import { mockProducts } from '@/data'
 import { addToCart } from '@/store/slices/cart'
 import { formatPrice } from '@/utils/helpers'
-import type { Product } from '@/types'
 
 const { Title, Paragraph } = Typography
 
@@ -16,31 +15,21 @@ const ProductDetail = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { t, i18n } = useTranslation()
-  const [product, setProduct] = useState<Product | null>(null)
-  const [loading, setLoading] = useState(true)
   const [quantity, setQuantity] = useState(1)
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      setLoading(true)
-      try {
-        if (id) {
-          const data = await getProductById(parseInt(id))
-          setProduct(data)
-        }
-      } catch (error) {
-        console.error('Failed to fetch product:', error)
-      }
-      setLoading(false)
-    }
-    fetchProduct()
-  }, [id])
+  const currentLang = i18n.language
+
+  const product = mockProducts.find((p) => p.id === id) || null
+
+  const getLocalizedText = (text: string | Record<string, string>) => {
+    return typeof text === 'string' ? text : text[currentLang] || text.en
+  }
 
   const handleAddToCart = () => {
     if (product) {
       dispatch(addToCart({
-        product_id: product.id,
-        name: product.name,
+        product_id: typeof product.id === 'number' ? product.id : parseInt(product.id),
+        name: getLocalizedText(product.name),
         price: product.price,
         quantity,
         image: product.images[0] || '',
@@ -59,23 +48,18 @@ const ProductDetail = () => {
     'fr': 'fr-FR',
     'ru': 'ru-RU',
     'es': 'es-ES',
-  }[i18n.language] || 'zh-CN'
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <Tag color="processing">Loading...</Tag>
-      </div>
-    )
-  }
+  }[currentLang] || 'zh-CN'
 
   if (!product) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <p className="text-gray-500">{t('product.name')}</p>
+        <p className="text-gray-500">Product not found</p>
       </div>
     )
   }
+
+  const name = getLocalizedText(product.name)
+  const description = getLocalizedText(product.description)
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -90,7 +74,7 @@ const ProductDetail = () => {
             <Image.PreviewGroup>
               <Image
                 src={product.images[0] || 'https://via.placeholder.com/600x600'}
-                alt={product.name}
+                alt={name}
                 className="w-full h-auto"
               />
               <div className="flex gap-2 mt-4 overflow-x-auto">
@@ -98,7 +82,7 @@ const ProductDetail = () => {
                   <Image
                     key={index}
                     src={img}
-                    alt={`${product.name} ${index + 1}`}
+                    alt={`${name} ${index + 1}`}
                     width={100}
                     height={100}
                     className="cursor-pointer"
@@ -112,15 +96,15 @@ const ProductDetail = () => {
             <div className="bg-white rounded-lg shadow-sm p-6">
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div>
-                  <Tag color="blue">{product.sub_category}</Tag>
-                  <Title level={2} className="mt-2">{product.name}</Title>
+                  <Tag color="blue">{product.subCategory || product.sub_category}</Tag>
+                  <Title level={2} className="mt-2">{name}</Title>
                 </div>
                 <Tag color={product.stock > 0 ? 'green' : 'red'}>
                   {product.stock > 0 ? `${t('product.stock')}: ${product.stock}` : 'Out of stock'}
                 </Tag>
               </div>
 
-              <Paragraph className="text-gray-600 mb-6">{product.description}</Paragraph>
+              <Paragraph className="text-gray-600 mb-6">{description}</Paragraph>
 
               <div className="text-3xl font-bold text-primary-600 mb-6">
                 {formatPrice(product.price, locale)}

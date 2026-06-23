@@ -1,66 +1,58 @@
-import { useState, useEffect } from 'react'
-import { Row, Col, Select, Input, Typography, Tag } from 'antd'
+import { useState, useMemo } from 'react'
+import { Row, Col, Select, Input, Typography } from 'antd'
 import ProductCard from '@/components/ProductCard'
 import { useTranslation } from '@/hooks/useTranslation'
-import { getProducts } from '@/api/products'
+import { mockProducts, productSubCategories } from '@/data'
 import type { Product } from '@/types'
 
 const { Title } = Typography
 const { Search } = Input
 
 const Products = () => {
-  const { t } = useTranslation()
-  const [products, setProducts] = useState<Product[]>([])
-  const [loading, setLoading] = useState(true)
+  const { t, i18n } = useTranslation()
   const [category, setCategory] = useState('')
   const [subCategory, setSubCategory] = useState('')
   const [searchValue, setSearchValue] = useState('')
 
   const categories = [
-    { value: 'device', label: '3D打印设备' },
+    { value: 'printer', label: t('product.category') === 'Category' ? '3D打印设备' : t('product.category') },
     { value: 'material', label: '打印耗材' },
   ]
 
-  const subCategories: Record<string, { value: string; label: string }[]> = {
-    device: [
-      { value: 'fdm', label: 'FDM桌面级' },
-      { value: 'sla', label: 'SLA光固化' },
-      { value: 'sls', label: 'SLS激光烧结' },
-      { value: 'industrial', label: '工业级' },
-    ],
-    material: [
-      { value: 'pla', label: 'PLA耗材' },
-      { value: 'abs', label: 'ABS耗材' },
-      { value: 'petg', label: 'PETG耗材' },
-      { value: 'resin', label: '光敏树脂' },
-      { value: 'metal', label: '金属粉末' },
-    ],
-  }
+  const currentLang = i18n.language
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true)
-      try {
-        const data = await getProducts({
-          category,
-          sub_category: subCategory,
-        })
-        let filtered = data
-        if (searchValue) {
-          filtered = data.filter(
-            (p) =>
-              p.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-              p.description.toLowerCase().includes(searchValue.toLowerCase())
-          )
-        }
-        setProducts(filtered)
-      } catch (error) {
-        console.error('Failed to fetch products:', error)
-      }
-      setLoading(false)
+  const subCategories = productSubCategories as Record<string, { id: string; name: { [key: string]: string } }[]>
+
+  const filteredProducts = useMemo(() => {
+    let result: Product[] = [...mockProducts]
+
+    if (category) {
+      result = result.filter((p) => p.category === category)
     }
-    fetchProducts()
-  }, [category, subCategory, searchValue])
+
+    if (subCategory) {
+      result = result.filter((p) => p.subCategory === subCategory)
+    }
+
+    if (searchValue) {
+      const searchLower = searchValue.toLowerCase()
+      result = result.filter((p) => {
+        const name = typeof p.name === 'string' ? p.name : (p.name as Record<string, string>)[currentLang]
+        const desc = typeof p.description === 'string' ? p.description : (p.description as Record<string, string>)[currentLang]
+        return (name?.toLowerCase().includes(searchLower) || desc?.toLowerCase().includes(searchLower))
+      })
+    }
+
+    return result
+  }, [category, subCategory, searchValue, currentLang])
+
+  const getSubCategoryOptions = () => {
+    if (!category) return []
+    return (subCategories[category] || []).map((item) => ({
+      value: item.id,
+      label: item.name[currentLang] || item.name.en,
+    }))
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -84,7 +76,7 @@ const Products = () => {
                   value={subCategory}
                   onChange={setSubCategory}
                   style={{ width: 160 }}
-                  options={subCategories[category] || []}
+                  options={getSubCategoryOptions()}
                   allowClear
                 />
               )}
@@ -98,17 +90,13 @@ const Products = () => {
           </div>
         </div>
 
-        {loading ? (
-          <div className="text-center py-12">
-            <Tag color="processing">Loading...</Tag>
-          </div>
-        ) : products.length === 0 ? (
+        {filteredProducts.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-500">{t('product.name')}</p>
           </div>
         ) : (
           <Row gutter={[16, 16]}>
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <Col key={product.id} xs={24} sm={12} md={6}>
                 <ProductCard product={product} />
               </Col>

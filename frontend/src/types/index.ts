@@ -1,27 +1,46 @@
+export type LocalizedString = {
+  zh: string
+  en: string
+  fr: string
+  ru: string
+  es: string
+}
+
 export interface Product {
-  id: number
-  name: string
+  id: string | number
+  name: string | LocalizedString
   category: string
-  sub_category: string
+  subCategory?: string
+  sub_category?: string
   price: number
-  description: string
+  originalPrice?: number
+  description: string | LocalizedString
   specs: Record<string, string | number>
+  features?: string[]
+  applications?: string[]
   images: string[]
   stock: number
-  is_active: boolean
-  created_at: string
-  updated_at: string
+  sales?: number
+  rating?: number
+  reviews?: number
+  is_active?: boolean
+  createdAt?: string
+  created_at?: string
+  updated_at?: string
 }
 
 export interface Article {
-  id: number
-  title: string
-  content: string
-  category: string
-  author: string
-  publish_time: string
+  id: string | number
+  title: string | LocalizedString
+  summary?: string | LocalizedString
+  content: string | LocalizedString
+  category: string | LocalizedString
+  author: string | LocalizedString
+  publish_time?: string
   views: number
-  created_at: string
+  createdAt?: string
+  created_at?: string
+  image?: string
 }
 
 export interface User {

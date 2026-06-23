@@ -1,16 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import { Row, Col, Select, Typography } from 'antd'
 import ArticleCard from '@/components/ArticleCard'
 import { useTranslation } from '@/hooks/useTranslation'
-import { getArticles } from '@/api/articles'
-import type { Article } from '@/types'
+import { mockArticles } from '@/data'
 
 const { Title } = Typography
 
 const Articles = () => {
   const { t } = useTranslation()
-  const [articles, setArticles] = useState<Article[]>([])
-  const [loading, setLoading] = useState(true)
   const [category, setCategory] = useState('')
 
   const categories = [
@@ -21,18 +18,9 @@ const Articles = () => {
     { value: 'new', label: '新品发布' },
   ]
 
-  useEffect(() => {
-    const fetchArticles = async () => {
-      setLoading(true)
-      try {
-        const data = await getArticles(category || undefined)
-        setArticles(data)
-      } catch (error) {
-        console.error('Failed to fetch articles:', error)
-      }
-      setLoading(false)
-    }
-    fetchArticles()
+  const filteredArticles = useMemo(() => {
+    if (!category) return mockArticles
+    return mockArticles
   }, [category])
 
   return (
@@ -49,17 +37,13 @@ const Articles = () => {
           />
         </div>
 
-        {loading ? (
-          <div className="text-center py-12">
-            <Typography.Text>Loading...</Typography.Text>
-          </div>
-        ) : articles.length === 0 ? (
+        {filteredArticles.length === 0 ? (
           <div className="text-center py-12">
             <Typography.Text className="text-gray-500">No articles found</Typography.Text>
           </div>
         ) : (
           <Row gutter={[16, 16]}>
-            {articles.map((article) => (
+            {filteredArticles.map((article) => (
               <Col key={article.id} xs={24} sm={12} md={8}>
                 <ArticleCard article={article} />
               </Col>
