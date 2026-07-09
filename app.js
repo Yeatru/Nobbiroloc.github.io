@@ -32,13 +32,15 @@ App({
         name: 'AI文案生成',
         icon: 'copy',
         color: '#4A90D9',
-        desc: '朋友圈文案、短视频脚本、婚礼致辞、职场汇报、起名工具',
+        desc: '朋友圈文案、短视频脚本、婚礼致辞、起名工具、星座运势、藏头诗',
         children: [
           { id: 'moments', name: '朋友圈文案', icon: 'moments' },
           { id: 'video-script', name: '短视频脚本', icon: 'video' },
           { id: 'wedding', name: '婚礼致辞', icon: 'wedding' },
           { id: 'work-report', name: '职场汇报', icon: 'report' },
-          { id: 'name-generator', name: '起名工具', icon: 'name' }
+          { id: 'name-generator', name: '起名工具', icon: 'name' },
+          { id: 'horoscope', name: '星座运势', icon: 'horoscope' },
+          { id: 'acrostic-poem', name: '藏头诗生成', icon: 'poem' }
         ]
       },
       {
@@ -46,13 +48,35 @@ App({
         name: 'AI图片处理',
         icon: 'image',
         color: '#E74C3C',
-        desc: '证件照换底色、图片加相框、图片去水印、证件裁剪、头像美化',
+        desc: '证件照换底色、图片去水印、表情包生成、证件裁剪、头像美化',
         children: [
           { id: 'id-bg', name: '证件照换底色', icon: 'id-bg' },
           { id: 'frame', name: '图片加相框', icon: 'frame' },
           { id: 'remove-watermark', name: '图片去水印', icon: 'watermark' },
           { id: 'id-crop', name: '证件裁剪', icon: 'crop' },
-          { id: 'avatar-beauty', name: '头像美化', icon: 'beauty' }
+          { id: 'avatar-beauty', name: '头像美化', icon: 'beauty' },
+          { id: 'meme-generator', name: '表情包生成', icon: 'meme' }
+        ]
+      },
+      {
+        id: 'health-tool',
+        name: '健康工具',
+        icon: 'health',
+        color: '#9B59B6',
+        desc: 'BMI身体质量指数计算、健康建议',
+        children: [
+          { id: 'bmi', name: 'BMI计算器', icon: 'bmi' }
+        ]
+      },
+      {
+        id: 'efficiency-tool',
+        name: '效率工具',
+        icon: 'efficiency',
+        color: '#1ABC9C',
+        desc: '日期天数计算、字数统计、实用小工具',
+        children: [
+          { id: 'date-calc', name: '日期计算器', icon: 'date' },
+          { id: 'word-count', name: '字数统计', icon: 'word' }
         ]
       },
       {
@@ -73,10 +97,12 @@ App({
         name: '财务计算器',
         icon: 'finance',
         color: '#F39C12',
-        desc: '个税计算、房贷车贷计算、基金定投收益、汇率换算',
+        desc: '个税计算、房贷计算、提前还款、油耗计算、基金定投、汇率换算',
         children: [
           { id: 'tax', name: '个税计算', icon: 'tax' },
           { id: 'mortgage', name: '房贷计算', icon: 'mortgage' },
+          { id: 'prepay-mortgage', name: '提前还款', icon: 'prepay' },
+          { id: 'fuel-calc', name: '油耗计算器', icon: 'fuel' },
           { id: 'fund', name: '基金定投', icon: 'fund' },
           { id: 'exchange', name: '汇率换算', icon: 'exchange' }
         ]

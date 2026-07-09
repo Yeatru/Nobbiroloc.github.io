@@ -44,13 +44,13 @@ Page({
   loadHotTools: function () {
     const hotTools = [
       { id: 'id-bg', name: '证件照换底色', icon: 'id-bg', color: '#E74C3C', categoryId: 'ai-image', categoryName: 'AI图片处理' },
-      { id: 'remove-watermark', name: '图片去水印', icon: 'watermark', color: '#E74C3C', categoryId: 'ai-image', categoryName: 'AI图片处理' },
+      { id: 'bmi', name: 'BMI计算器', icon: 'bmi', color: '#9B59B6', categoryId: 'health-tool', categoryName: '健康工具' },
       { id: 'moments', name: '朋友圈文案', icon: 'moments', color: '#4A90D9', categoryId: 'ai-copy', categoryName: 'AI文案生成' },
-      { id: 'name-generator', name: '起名工具', icon: 'name', color: '#4A90D9', categoryId: 'ai-copy', categoryName: 'AI文案生成' },
+      { id: 'horoscope', name: '星座运势', icon: 'horoscope', color: '#4A90D9', categoryId: 'ai-copy', categoryName: 'AI文案生成' },
       { id: 'mortgage', name: '房贷计算', icon: 'mortgage', color: '#F39C12', categoryId: 'finance-calc', categoryName: '财务计算器' },
-      { id: 'tax', name: '个税计算', icon: 'tax', color: '#F39C12', categoryId: 'finance-calc', categoryName: '财务计算器' },
-      { id: 'tile', name: '瓷砖用量', icon: 'tile', color: '#27AE60', categoryId: 'decor-calc', categoryName: '装修计算器' },
-      { id: 'paint', name: '乳胶漆用量', icon: 'paint', color: '#27AE60', categoryId: 'decor-calc', categoryName: '装修计算器' }
+      { id: 'date-calc', name: '日期计算器', icon: 'date', color: '#1ABC9C', categoryId: 'efficiency-tool', categoryName: '效率工具' },
+      { id: 'word-count', name: '字数统计', icon: 'word', color: '#1ABC9C', categoryId: 'efficiency-tool', categoryName: '效率工具' },
+      { id: 'acrostic-poem', name: '藏头诗生成', icon: 'poem', color: '#4A90D9', categoryId: 'ai-copy', categoryName: 'AI文案生成' }
     ]
     this.setData({ hotTools })
   },

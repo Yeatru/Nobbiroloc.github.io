@@ -78,6 +78,71 @@
         <view class="name-tip">仅展示前3个免费名字，解锁查看更多</view>
       </block>
 
+      <block wx:elif="{{resultData.toolId === 'horoscope'}}">
+        <view class="horoscope-result">
+          <view class="horoscope-header">
+            <view class="horoscope-zodiac">{{resultData.results.zodiac}}</view>
+            <view class="horoscope-date">{{resultData.results.date}}</view>
+          </view>
+          <view class="horoscope-score-row">
+            <view class="score-item">
+              <view class="score-label">综合运势</view>
+              <view class="score-stars">{{resultData.results.overallStar}}</view>
+            </view>
+            <view class="score-item">
+              <view class="score-label">爱情运势</view>
+              <view class="score-stars">{{resultData.results.loveStar}}</view>
+            </view>
+            <view class="score-item">
+              <view class="score-label">事业运势</view>
+              <view class="score-stars">{{resultData.results.careerStar}}</view>
+            </view>
+          </view>
+          <view class="horoscope-section">
+            <view class="section-title-small">整体运势</view>
+            <view class="section-text">{{resultData.results.overall}}</view>
+          </view>
+          <view class="horoscope-section">
+            <view class="section-title-small">爱情运势</view>
+            <view class="section-text">{{resultData.results.love}}</view>
+          </view>
+          <view class="horoscope-section">
+            <view class="section-title-small">事业运势</view>
+            <view class="section-text">{{resultData.results.career}}</view>
+          </view>
+          <view class="horoscope-section">
+            <view class="section-title-small">财运指数</view>
+            <view class="section-text">{{resultData.results.wealth}}</view>
+          </view>
+          <view class="horoscope-section">
+            <view class="section-title-small">健康运势</view>
+            <view class="section-text">{{resultData.results.health}}</view>
+          </view>
+          <view class="horoscope-lucky">
+            <view class="lucky-item">
+              <text class="lucky-label">幸运颜色</text>
+              <text class="lucky-value">{{resultData.results.luckyColor}}</text>
+            </view>
+            <view class="lucky-item">
+              <text class="lucky-label">幸运数字</text>
+              <text class="lucky-value">{{resultData.results.luckyNumber}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+
+      <block wx:elif="{{resultData.toolId === 'acrostic-poem'}}">
+        <view class="poem-result">
+          <view class="poem-title">{{resultData.results.title}}</view>
+          <view class="poem-lines">
+            <view class="poem-line" wx:for="{{resultData.results.lines}}" wx:key="index">
+              {{item}}
+            </view>
+          </view>
+          <view class="poem-author">—— {{resultData.results.author}}</view>
+        </view>
+      </block>
+
       <button class="btn-primary mt-30" bindtap="onCopyAll">
         一键复制全部
       </button>
@@ -263,9 +328,191 @@
         <view class="calc-suggestion">💡 {{resultData.data.suggestion}}</view>
       </block>
 
+      <block wx:elif="{{resultData.toolId === 'prepay-mortgage'}}">
+        <view class="calc-result-row">
+          <view class="calc-label">原贷款信息</view>
+          <view class="calc-value">{{resultData.data.loanAmount}}万 / {{resultData.data.years}}年 / {{resultData.data.rate}}%</view>
+        </view>
+        <view class="calc-divider"></view>
+        <view class="calc-result-row">
+          <view class="calc-label">原总利息</view>
+          <view class="calc-value">¥ {{resultData.data.originalTotalInterest}}</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">提前还款金额</view>
+          <view class="calc-value text-primary">¥ {{resultData.data.prepayAmount}} 万</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">节省利息</view>
+          <view class="calc-value text-success">¥ {{resultData.data.savedInterest}}</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">缩短年限</view>
+          <view class="calc-value text-success">{{resultData.data.shortenedMonths}} 个月</view>
+        </view>
+        <view class="calc-suggestion">💡 {{resultData.data.suggestion}}</view>
+      </block>
+
+      <block wx:elif="{{resultData.toolId === 'fuel-calc'}}">
+        <view class="calc-result-row">
+          <view class="calc-label">行驶里程</view>
+          <view class="calc-value">{{resultData.data.distance}} 公里</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">油价</view>
+          <view class="calc-value">¥ {{resultData.data.fuelPrice}}/升</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">百公里油耗</view>
+          <view class="calc-value">{{resultData.data.fuelConsumption}} 升</view>
+        </view>
+        <view class="calc-divider"></view>
+        <view class="calc-result-row">
+          <view class="calc-label">总油费</view>
+          <view class="calc-value text-primary">¥ {{resultData.data.totalCost}}</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">每公里油费</view>
+          <view class="calc-value">¥ {{resultData.data.perKmCost}}</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">用油量</view>
+          <view class="calc-value">{{resultData.data.totalFuel}} 升</view>
+        </view>
+        <view class="calc-suggestion">💡 {{resultData.data.suggestion}}</view>
+      </block>
+
       <button class="btn-outline mt-30" bindtap="onExport">
         {{isUnlocked ? '导出详细报表' : '解锁导出功能'}}
       </button>
+    </view>
+  </view>
+
+  <view class="result-content card" wx:if="{{resultData && resultData.type === 'health'}}">
+    <view class="card-body">
+      <block wx:if="{{resultData.toolId === 'bmi'}}">
+        <view class="bmi-result">
+          <view class="bmi-value-wrap">
+            <view class="bmi-number">{{resultData.data.bmi}}</view>
+            <view class="bmi-label">BMI指数</view>
+          </view>
+          <view class="bmi-status status-{{resultData.data.level}}">{{resultData.data.status}}</view>
+          <view class="bmi-range-row">
+            <view class="bmi-range-item {{resultData.data.level === 1 ? 'active' : ''}}">偏瘦
+              <text class="range-desc">＜18.5</text>
+            </view>
+            <view class="bmi-range-item {{resultData.data.level === 2 ? 'active' : ''}}">正常
+              <text class="range-desc">18.5-24</text>
+            </view>
+            <view class="bmi-range-item {{resultData.data.level === 3 ? 'active' : ''}}">偏胖
+              <text class="range-desc">24-28</text>
+            </view>
+            <view class="bmi-range-item {{resultData.data.level === 4 ? 'active' : ''}}">肥胖
+              <text class="range-desc">≥28</text>
+            </view>
+          </view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">身高</view>
+          <view class="calc-value">{{resultData.data.height}} cm</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">体重</view>
+          <view class="calc-value">{{resultData.data.weight}} kg</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">标准体重范围</view>
+          <view class="calc-value text-primary">{{resultData.data.normalWeightMin}} - {{resultData.data.normalWeightMax}} kg</view>
+        </view>
+        <view class="calc-suggestion">💡 {{resultData.data.suggestion}}</view>
+      </block>
+    </view>
+  </view>
+
+  <view class="result-content card" wx:if="{{resultData && resultData.type === 'efficiency'}}">
+    <view class="card-body">
+      <block wx:if="{{resultData.toolId === 'word-count'}}">
+        <view class="word-count-grid">
+          <view class="wc-item">
+            <view class="wc-number">{{resultData.data.charCount}}</view>
+            <view class="wc-label">总字符数</view>
+          </view>
+          <view class="wc-item">
+            <view class="wc-number">{{resultData.data.charCountNoSpace}}</view>
+            <view class="wc-label">不含空格</view>
+          </view>
+          <view class="wc-item">
+            <view class="wc-number">{{resultData.data.chineseCount}}</view>
+            <view class="wc-label">中文字符</view>
+          </view>
+          <view class="wc-item">
+            <view class="wc-number">{{resultData.data.englishCount}}</view>
+            <view class="wc-label">英文字符</view>
+          </view>
+          <view class="wc-item">
+            <view class="wc-number">{{resultData.data.numberCount}}</view>
+            <view class="wc-label">数字字符</view>
+          </view>
+          <view class="wc-item">
+            <view class="wc-number">{{resultData.data.lineCount}}</view>
+            <view class="wc-label">行数</view>
+          </view>
+          <view class="wc-item wc-item-wide">
+            <view class="wc-number">{{resultData.data.paragraphCount}}</view>
+            <view class="wc-label">段落数</view>
+          </view>
+        </view>
+        <button class="btn-outline mt-30" bindtap="onCopyAll">
+          复制统计结果
+        </button>
+      </block>
+
+      <block wx:elif="{{resultData.toolId === 'date-calc'}}">
+        <block wx:if="{{resultData.data.calcType === 'diff'}}">
+          <view class="date-result">
+            <view class="date-row">
+              <text class="date-label">开始日期</text>
+              <text class="date-value">{{resultData.data.date1}}</text>
+            </view>
+            <view class="date-row">
+              <text class="date-label">结束日期</text>
+              <text class="date-value">{{resultData.data.date2}}</text>
+            </view>
+            <view class="date-divider"></view>
+            <view class="date-result-main">
+              <view class="days-diff">{{resultData.data.daysDiff}}</view>
+              <view class="days-label">相差天数</view>
+            </view>
+            <view class="date-extra">
+              <text>约 {{resultData.data.weeksDiff}} 周</text>
+              <text>约 {{resultData.data.monthsDiff}} 个月</text>
+              <text>约 {{resultData.data.yearsDiff}} 年</text>
+            </view>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="date-result">
+            <view class="date-row">
+              <text class="date-label">起始日期</text>
+              <text class="date-value">{{resultData.data.date1}}</text>
+            </view>
+            <view class="date-row">
+              <text class="date-label">加减天数</text>
+              <text class="date-value">{{resultData.data.days > 0 ? '+' : ''}}{{resultData.data.days}} 天</text>
+            </view>
+            <view class="date-divider"></view>
+            <view class="date-result-main">
+              <view class="result-date">{{resultData.data.resultDate}}</view>
+              <view class="days-label">计算结果</view>
+            </view>
+            <view class="date-extra">
+              <text>星期{{resultData.data.weekday}}</text>
+              <text>第{{resultData.data.weekOfYear}}周</text>
+              <text>第{{resultData.data.dayOfYear}}天</text>
+            </view>
+          </view>
+        </block>
+      </block>
     </view>
   </view>
 

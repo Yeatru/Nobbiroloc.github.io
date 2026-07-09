@@ -359,3 +359,293 @@
   color: #bbbbbb;
   padding: 20rpx 32rpx 32rpx;
 }
+
+.horoscope-result {
+  padding: 10rpx 0;
+}
+
+.horoscope-header {
+  text-align: center;
+  padding: 20rpx 0 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  margin-bottom: 24rpx;
+}
+
+.horoscope-zodiac {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 8rpx;
+}
+
+.horoscope-date {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.horoscope-score-row {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30rpx;
+}
+
+.score-item {
+  text-align: center;
+}
+
+.score-label {
+  font-size: 24rpx;
+  color: #666666;
+  margin-bottom: 8rpx;
+}
+
+.score-stars {
+  font-size: 28rpx;
+  color: #FFB800;
+}
+
+.horoscope-section {
+  margin-bottom: 24rpx;
+}
+
+.section-title-small {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 10rpx;
+}
+
+.section-text {
+  font-size: 26rpx;
+  color: #666666;
+  line-height: 1.6;
+}
+
+.horoscope-lucky {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f8f8f8;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-top: 20rpx;
+}
+
+.lucky-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lucky-label {
+  font-size: 22rpx;
+  color: #999999;
+  margin-bottom: 6rpx;
+}
+
+.lucky-value {
+  font-size: 26rpx;
+  color: #4A90D9;
+  font-weight: 500;
+}
+
+.poem-result {
+  background: linear-gradient(135deg, #fef9f3 0%, #fdf3e7 100%);
+  border-radius: 16rpx;
+  padding: 40rpx 30rpx;
+  text-align: center;
+}
+
+.poem-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #663300;
+  margin-bottom: 30rpx;
+}
+
+.poem-lines {
+  margin-bottom: 30rpx;
+}
+
+.poem-line {
+  font-size: 30rpx;
+  color: #663300;
+  line-height: 2.2;
+  letter-spacing: 4rpx;
+}
+
+.poem-author {
+  font-size: 24rpx;
+  color: #996633;
+}
+
+.calc-divider {
+  height: 1rpx;
+  background-color: #f0f0f0;
+  margin: 10rpx 0;
+}
+
+.bmi-result {
+  text-align: center;
+  padding: 20rpx 0 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  margin-bottom: 20rpx;
+}
+
+.bmi-value-wrap {
+  margin-bottom: 16rpx;
+}
+
+.bmi-number {
+  font-size: 72rpx;
+  font-weight: 700;
+  color: #4A90D9;
+  line-height: 1.2;
+}
+
+.bmi-label {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.bmi-status {
+  display: inline-block;
+  padding: 8rpx 30rpx;
+  border-radius: 30rpx;
+  font-size: 26rpx;
+  font-weight: 500;
+  margin-bottom: 30rpx;
+}
+
+.bmi-status.status-1 {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.bmi-status.status-2 {
+  background-color: #e8f5e9;
+  color: #388e3c;
+}
+
+.bmi-status.status-3 {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.bmi-status.status-4 {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.bmi-range-row {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 16rpx 10rpx;
+}
+
+.bmi-range-item {
+  flex: 1;
+  text-align: center;
+  font-size: 22rpx;
+  color: #999999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.bmi-range-item .range-desc {
+  font-size: 18rpx;
+  margin-top: 4rpx;
+}
+
+.bmi-range-item.active {
+  color: #4A90D9;
+  font-weight: 600;
+}
+
+.word-count-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+  margin-bottom: 10rpx;
+}
+
+.wc-item {
+  background-color: #f8f8f8;
+  border-radius: 12rpx;
+  padding: 24rpx 10rpx;
+  text-align: center;
+}
+
+.wc-item.wc-item-wide {
+  grid-column: span 3;
+}
+
+.wc-number {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #4A90D9;
+  margin-bottom: 6rpx;
+}
+
+.wc-label {
+  font-size: 22rpx;
+  color: #999999;
+}
+
+.date-result {
+  padding: 10rpx 0;
+}
+
+.date-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+}
+
+.date-label {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.date-value {
+  font-size: 28rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.date-divider {
+  height: 1rpx;
+  background-color: #f0f0f0;
+  margin: 20rpx 0;
+}
+
+.date-result-main {
+  text-align: center;
+  padding: 30rpx 0;
+}
+
+.days-diff, .result-date {
+  font-size: 56rpx;
+  font-weight: 700;
+  color: #4A90D9;
+  margin-bottom: 10rpx;
+}
+
+.days-label {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.date-extra {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f8f8f8;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  font-size: 24rpx;
+  color: #666666;
+}

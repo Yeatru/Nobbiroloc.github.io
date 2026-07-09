@@ -51,6 +51,7 @@ Page({
 
     let disclaimer = ''
     const type = resultData.type
+    const toolId = resultData.toolId
 
     if (type === 'calculator') {
       disclaimer = config.COMPLIANCE.FINANCE_DISCLAIMER
@@ -58,9 +59,13 @@ Page({
       disclaimer = config.COMPLIANCE.IMAGE_DISCLAIMER
     } else if (type === 'copy') {
       disclaimer = config.COMPLIANCE.AI_DISCLAIMER
-      if (resultData.toolId === 'name-generator') {
+      if (toolId === 'name-generator') {
         disclaimer = config.COMPLIANCE.NAME_DISCLAIMER
+      } else if (toolId === 'horoscope') {
+        disclaimer = config.COMPLIANCE.HOROSCOPE_DISCLAIMER
       }
+    } else if (type === 'health') {
+      disclaimer = config.COMPLIANCE.HEALTH_DISCLAIMER
     }
 
     this.setData({ disclaimer })
@@ -80,30 +85,64 @@ Page({
 
   onCopyAll: function () {
     const resultData = this.data.resultData
-    if (!resultData || resultData.type !== 'copy') return
+    if (!resultData) return
 
     let text = ''
-    if (resultData.toolId === 'video-script' || resultData.toolId === 'work-report') {
-      const result = resultData.results[0]
-      text = result.title + '\n\n'
-      if (result.scenes) {
-        result.scenes.forEach(scene => {
-          text += `【${scene.time}】${scene.content}\n\n`
+    const type = resultData.type
+    const toolId = resultData.toolId
+
+    if (type === 'copy') {
+      if (toolId === 'video-script' || toolId === 'work-report') {
+        const result = resultData.results[0]
+        text = result.title + '\n\n'
+        if (result.scenes) {
+          result.scenes.forEach(scene => {
+            text += `【${scene.time}】${scene.content}\n\n`
+          })
+        } else if (result.sections) {
+          result.sections.forEach(section => {
+            text += section.title + '\n' + section.content + '\n\n'
+          })
+        }
+      } else if (toolId === 'wedding') {
+        text = resultData.results[0]
+      } else if (toolId === 'name-generator') {
+        text = resultData.results.filter(r => r.isFree).map(r => r.name).join('、')
+      } else if (toolId === 'horoscope') {
+        const r = resultData.results
+        text = `${r.zodiac}今日运势\n`
+        text += `日期：${r.date}\n\n`
+        text += `${r.overall}\n\n`
+        text += `${r.love}\n`
+        text += `${r.career}\n`
+        text += `${r.wealth}\n`
+        text += `${r.health}\n\n`
+        text += `幸运颜色：${r.luckyColor}\n`
+        text += `幸运数字：${r.luckyNumber}`
+      } else if (toolId === 'acrostic-poem') {
+        const r = resultData.results
+        text = `${r.title}\n\n`
+        r.lines.forEach(line => {
+          text += line + '\n'
         })
-      } else if (result.sections) {
-        result.sections.forEach(section => {
-          text += section.title + '\n' + section.content + '\n\n'
-        })
+      } else {
+        text = resultData.results.join('\n\n')
       }
-    } else if (resultData.toolId === 'wedding') {
-      text = resultData.results[0]
-    } else if (resultData.toolId === 'name-generator') {
-      text = resultData.results.filter(r => r.isFree).map(r => r.name).join('、')
-    } else {
-      text = resultData.results.join('\n\n')
+    } else if (type === 'efficiency' && toolId === 'word-count') {
+      const d = resultData.data
+      text = `字数统计结果\n`
+      text += `总字符数：${d.charCount}\n`
+      text += `不含空格：${d.charCountNoSpace}\n`
+      text += `中文字符：${d.chineseCount}\n`
+      text += `英文字符：${d.englishCount}\n`
+      text += `数字字符：${d.numberCount}\n`
+      text += `行数：${d.lineCount}\n`
+      text += `段落数：${d.paragraphCount}`
     }
 
-    util.copyToClipboard(text)
+    if (text) {
+      util.copyToClipboard(text)
+    }
   },
 
   onSaveImage: function () {

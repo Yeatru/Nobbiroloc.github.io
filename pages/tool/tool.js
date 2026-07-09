@@ -81,6 +81,7 @@ Page({
   setDisclaimer: function () {
     let disclaimer = ''
     const categoryId = this.data.categoryId
+    const toolId = this.data.toolId
 
     if (categoryId === 'finance-calc' || categoryId === 'decor-calc') {
       disclaimer = config.COMPLIANCE.FINANCE_DISCLAIMER
@@ -88,10 +89,14 @@ Page({
       disclaimer = config.COMPLIANCE.IMAGE_DISCLAIMER
     } else if (categoryId === 'ai-copy') {
       disclaimer = config.COMPLIANCE.AI_DISCLAIMER
+    } else if (categoryId === 'health-tool') {
+      disclaimer = config.COMPLIANCE.HEALTH_DISCLAIMER
     }
 
-    if (this.data.toolId === 'name-generator') {
+    if (toolId === 'name-generator') {
       disclaimer = config.COMPLIANCE.NAME_DISCLAIMER
+    } else if (toolId === 'horoscope') {
+      disclaimer = config.COMPLIANCE.HOROSCOPE_DISCLAIMER
     }
 
     this.setData({ disclaimer })
@@ -138,6 +143,10 @@ Page({
       this.processDecorCalc()
     } else if (categoryId === 'finance-calc') {
       this.processFinanceCalc()
+    } else if (categoryId === 'health-tool') {
+      this.processHealthTool()
+    } else if (categoryId === 'efficiency-tool') {
+      this.processEfficiencyTool()
     }
   },
 
@@ -219,6 +228,47 @@ Page({
             meaning: `${style}风格，寓意美好`,
             isFree: i < 3
           })
+        }
+        break
+      case 'horoscope':
+        const zodiacs = ['白羊座', '金牛座', '双子座', '巨蟹座', '狮子座', '处女座', '天秤座', '天蝎座', '射手座', '摩羯座', '水瓶座', '双鱼座']
+        const luckyColors = ['红色', '蓝色', '绿色', '金色', '白色', '紫色', '粉色', '黑色', '橙色', '银色']
+        const fortunes = ['整体运势不错，各方面都比较顺利。', '今天桃花运旺盛，适合社交活动。', '工作上会有新的机遇，要好好把握。', '财运亨通，可能会有意外收获。', '心情愉悦，适合学习新技能。', '注意身体健康，保持规律作息。']
+        const zodiac = input && zodiacs.find(z => z.includes(input)) || zodiacs[Math.floor(Math.random() * zodiacs.length)]
+        results = {
+          zodiac: zodiac,
+          date: new Date().toISOString().split('T')[0],
+          overall: fortunes[Math.floor(Math.random() * fortunes.length)],
+          love: '爱情运势：' + fortunes[Math.floor(Math.random() * fortunes.length)],
+          career: '事业运势：' + fortunes[Math.floor(Math.random() * fortunes.length)],
+          wealth: '财富运势：' + fortunes[Math.floor(Math.random() * fortunes.length)],
+          health: '健康运势：' + fortunes[Math.floor(Math.random() * fortunes.length)],
+          luckyColor: luckyColors[Math.floor(Math.random() * luckyColors.length)],
+          luckyNumber: Math.floor(Math.random() * 100) + 1,
+          isFree: true
+        }
+        break
+      case 'acrostic-poem':
+        const chars = input.split('')
+        if (chars.length < 2 || chars.length > 8) {
+          results = { error: '请输入2-8个汉字' }
+        } else {
+          const poemLines = []
+          const poemTemplates = [
+            ['春风拂面', '花开满园', '月明如水', '思念如潮', '山水相依', '云雾缭绕', '星辰闪烁', '岁月静好'],
+            ['红日东升', '霞光万道', '云卷云舒', '风起云涌', '雨过天晴', '彩虹桥横', '夕阳西下', '夜幕降临'],
+            ['青山绿水', '白草红叶', '黄花满地', '绿树成荫', '碧波荡漾', '银装素裹', '金碧辉煌', '紫气东来']
+          ]
+          const template = poemTemplates[Math.floor(Math.random() * poemTemplates.length)]
+          chars.forEach((char, index) => {
+            const line = char + template[index % template.length].substring(1)
+            poemLines.push(line)
+          })
+          results = {
+            title: `${input}藏头诗`,
+            lines: poemLines,
+            isFree: true
+          }
         }
         break
     }
@@ -468,9 +518,279 @@ Page({
           suggestion: '汇率为模拟参考值，实际以银行实时汇率为准'
         }
         break
+      case 'prepay-mortgage':
+        const { loanAmount: prepayLoan, years: prepayYears, rate: prepayRate, prepayAmount, paidMonths } = this.data.selectedOptions
+        const loanAmt = (prepayLoan || amount) * 10000
+        const yrs = parseFloat(prepayYears) || 30
+        const rt = parseFloat(prepayRate) / 100 || 0.042
+        const prepay = parseFloat(prepayAmount) * 10000 || 100000
+        const paid = parseInt(paidMonths) || 12
+
+        const monthlyRate = rt / 12
+        const totalMonths = yrs * 12
+        const monthlyPayment = (loanAmt * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / (Math.pow(1 + monthlyRate, totalMonths) - 1)
+
+        let remainingPrincipal = loanAmt
+        let totalInterestPaid = 0
+        for (let i = 0; i < paid; i++) {
+          const interest = remainingPrincipal * monthlyRate
+          const principal = monthlyPayment - interest
+          totalInterestPaid += interest
+          remainingPrincipal -= principal
+        }
+
+        const newRemaining = remainingPrincipal - prepay
+        const newMonths = Math.ceil(Math.log(monthlyPayment / (monthlyPayment - newRemaining * monthlyRate)) / Math.log(1 + monthlyRate))
+        const savedMonths = totalMonths - paid - newMonths
+        const savedInterest = monthlyPayment * (totalMonths - paid) - (prepay + monthlyPayment * newMonths)
+
+        result.data = {
+          loanAmount: (loanAmt / 10000).toFixed(0) + '万',
+          years: yrs + '年',
+          rate: (rt * 100).toFixed(2) + '%',
+          monthlyPayment: monthlyPayment.toFixed(2),
+          paidMonths: paid + '个月',
+          prepayAmount: (prepay / 10000).toFixed(0) + '万',
+          remainingPrincipal: (remainingPrincipal / 10000).toFixed(2) + '万',
+          savedMonths: savedMonths + '个月',
+          savedInterest: (savedInterest / 10000).toFixed(2) + '万',
+          suggestion: '以上为等额本息估算，实际以银行为准，建议提前咨询银行违约金政策'
+        }
+        break
+      case 'fuel-calc':
+        const { distance, fuelPrice, fuelConsumption } = this.data.selectedOptions
+        const dist = parseFloat(distance) || amount
+        const price = parseFloat(fuelPrice) || 7.5
+        const consumption = parseFloat(fuelConsumption) || 8
+
+        const totalFuel = (dist * consumption / 100).toFixed(2)
+        const totalCost = (totalFuel * price).toFixed(2)
+        const perKmCost = (totalCost / dist).toFixed(2)
+
+        result.data = {
+          distance: dist + '公里',
+          fuelPrice: price + '元/升',
+          fuelConsumption: consumption + 'L/100km',
+          totalFuel: totalFuel + '升',
+          totalCost: totalCost + '元',
+          perKmCost: perKmCost + '元/公里',
+          suggestion: '以上为估算值，实际油耗受路况、驾驶习惯等因素影响'
+        }
+        break
     }
 
     return result
+  },
+
+  processHealthTool: function () {
+    const toolId = this.data.toolId
+    const inputValue = this.data.inputValue
+
+    if (toolId === 'bmi') {
+      const { height, weight } = this.data.selectedOptions
+      if (!height || !weight) {
+        util.showToast('请输入身高和体重')
+        return
+      }
+      const h = parseFloat(height) / 100
+      const w = parseFloat(weight)
+      if (isNaN(h) || isNaN(w) || h <= 0 || w <= 0) {
+        util.showToast('请输入有效的数值')
+        return
+      }
+
+      this.setData({ isProcessing: true })
+      setTimeout(() => {
+        const bmi = (w / (h * h)).toFixed(1)
+        let level = ''
+        let levelColor = ''
+        let suggestion = ''
+
+        if (bmi < 18.5) {
+          level = '偏瘦'
+          levelColor = '#3498DB'
+          suggestion = '建议适当增加营养摄入，保持规律作息，适量进行力量训练。'
+        } else if (bmi < 24) {
+          level = '正常'
+          levelColor = '#27AE60'
+          suggestion = '体重处于正常范围，继续保持健康的饮食和运动习惯。'
+        } else if (bmi < 28) {
+          level = '偏胖'
+          levelColor = '#F39C12'
+          suggestion = '建议适当控制饮食，增加有氧运动，保持健康的生活方式。'
+        } else {
+          level = '肥胖'
+          levelColor = '#E74C3C'
+          suggestion = '建议在医生指导下进行科学减重，注意饮食控制和运动锻炼。'
+        }
+
+        const result = {
+          type: 'health',
+          toolId: toolId,
+          toolName: this.data.toolName,
+          data: {
+            bmi: bmi,
+            level: level,
+            levelColor: levelColor,
+            height: height,
+            weight: weight,
+            suggestion: suggestion,
+            standard: 'BMI正常范围：18.5 - 23.9'
+          },
+          isFree: true
+        }
+
+        this.setData({
+          isProcessing: false,
+          resultData: result
+        })
+        this.goToResult()
+      }, 500)
+    }
+  },
+
+  processEfficiencyTool: function () {
+    const toolId = this.data.toolId
+    const inputValue = this.data.inputValue
+
+    if (toolId === 'word-count') {
+      if (!inputValue) {
+        util.showToast('请输入要统计的文字')
+        return
+      }
+
+      this.setData({ isProcessing: true })
+      setTimeout(() => {
+        const text = inputValue
+        const charCount = text.length
+        const charCountNoSpace = text.replace(/\s/g, '').length
+        const chineseCount = (text.match(/[\u4e00-\u9fa5]/g) || []).length
+        const englishCount = (text.match(/[a-zA-Z]/g) || []).length
+        const numberCount = (text.match(/[0-9]/g) || []).length
+        const lineCount = text.split('\n').length
+        const paragraphCount = text.split(/\n\s*\n/).filter(p => p.trim()).length || 1
+
+        const result = {
+          type: 'efficiency',
+          toolId: toolId,
+          toolName: this.data.toolName,
+          data: {
+            charCount: charCount,
+            charCountNoSpace: charCountNoSpace,
+            chineseCount: chineseCount,
+            englishCount: englishCount,
+            numberCount: numberCount,
+            lineCount: lineCount,
+            paragraphCount: paragraphCount
+          },
+          isFree: true
+        }
+
+        this.setData({
+          isProcessing: false,
+          resultData: result
+        })
+        this.goToResult()
+      }, 300)
+    } else if (toolId === 'date-calc') {
+      const { date1, date2, calcType } = this.data.selectedOptions
+
+      if (calcType === 'diff') {
+        if (!date1 || !date2) {
+          util.showToast('请选择两个日期')
+          return
+        }
+
+        this.setData({ isProcessing: true })
+        setTimeout(() => {
+          const d1 = new Date(date1)
+          const d2 = new Date(date2)
+          const diffTime = Math.abs(d2 - d1)
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+          const diffWeeks = Math.floor(diffDays / 7)
+          const diffMonths = Math.floor(diffDays / 30)
+
+          const result = {
+            type: 'efficiency',
+            toolId: toolId,
+            toolName: this.data.toolName,
+            data: {
+              calcType: 'diff',
+              date1: date1,
+              date2: date2,
+              diffDays: diffDays,
+              diffWeeks: diffWeeks,
+              diffMonths: diffMonths,
+              suggestion: `两个日期相差 ${diffDays} 天`
+            },
+            isFree: true
+          }
+
+          this.setData({
+            isProcessing: false,
+            resultData: result
+          })
+          this.goToResult()
+        }, 300)
+      } else {
+        if (!date1) {
+          util.showToast('请选择起始日期')
+          return
+        }
+        const days = parseInt(inputValue)
+        if (isNaN(days)) {
+          util.showToast('请输入天数')
+          return
+        }
+
+        this.setData({ isProcessing: true })
+        setTimeout(() => {
+          const d = new Date(date1)
+          d.setDate(d.getDate() + days)
+          const resultDate = d.toISOString().split('T')[0]
+
+          const result = {
+            type: 'efficiency',
+            toolId: toolId,
+            toolName: this.data.toolName,
+            data: {
+              calcType: 'add',
+              startDate: date1,
+              addDays: days,
+              resultDate: resultDate,
+              suggestion: `${days} 天后是 ${resultDate}`
+            },
+            isFree: true
+          }
+
+          this.setData({
+            isProcessing: false,
+            resultData: result
+          })
+          this.goToResult()
+        }, 300)
+      }
+    }
+  },
+
+  onDateChange: function (e) {
+    const { field } = e.currentTarget.dataset
+    const selectedOptions = { ...this.data.selectedOptions }
+    selectedOptions[field] = e.detail.value
+    this.setData({ selectedOptions })
+  },
+
+  onCalcTypeChange: function (e) {
+    const selectedOptions = { ...this.data.selectedOptions }
+    selectedOptions.calcType = e.detail.value
+    this.setData({ selectedOptions })
+  },
+
+  onHealthInputChange: function (e) {
+    const { field } = e.currentTarget.dataset
+    const selectedOptions = { ...this.data.selectedOptions }
+    selectedOptions[field] = e.detail.value
+    this.setData({ selectedOptions })
   },
 
   goToResult: function () {
