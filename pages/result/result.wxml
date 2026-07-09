@@ -160,8 +160,8 @@
     </button>
   </view>
 
-  <view class="result-content card" wx:if="{{resultData && resultData.type === 'calculator'}}">
-    <view class="card-body">
+  <view class="result-content" wx:if="{{resultData && resultData.type === 'calculator'}}">
+    <view class="calc-result-card">
       <block wx:if="{{resultData.toolId === 'tile'}}">
         <view class="calc-result-row">
           <view class="calc-label">瓷砖数量</view>
@@ -307,17 +307,17 @@
       </block>
 
       <block wx:elif="{{resultData.toolId === 'exchange'}}">
-        <view class="calc-result-row">
-          <view class="calc-label">兑换金额</view>
-          <view class="calc-value text-primary">¥ {{resultData.data.amount}}</view>
-        </view>
-        <view
-          class="exchange-item"
-          wx:for="{{resultData.data.rates}}"
-          wx:key="currency"
-        >
-          <view class="exchange-currency">{{item.currency}}</view>
-          <view class="exchange-amount">{{item.amount}}</view>
+        <view class="exchange-card">
+          <view class="exchange-header">{{resultData.data.fromCurrency}}</view>
+          <view class="exchange-amount-big">¥ {{resultData.data.amount}}</view>
+          <view
+            class="exchange-item"
+            wx:for="{{resultData.data.rates}}"
+            wx:key="currency"
+          >
+            <view class="exchange-currency">{{item.currency}}</view>
+            <view class="exchange-amount">{{item.amount}}</view>
+          </view>
         </view>
         <view class="calc-suggestion">💡 {{resultData.data.suggestion}}</view>
       </block>
@@ -375,15 +375,14 @@
         </view>
         <view class="calc-suggestion">💡 {{resultData.data.suggestion}}</view>
       </block>
-
-      <button class="btn-outline mt-30" bindtap="onExport">
-        {{isUnlocked ? '导出详细报表' : '解锁导出功能'}}
-      </button>
     </view>
+    <button class="btn-outline mt-30" bindtap="onExport">
+      {{isUnlocked ? '导出详细报表' : '解锁导出功能'}}
+    </button>
   </view>
 
-  <view class="result-content card" wx:if="{{resultData && resultData.type === 'health'}}">
-    <view class="card-body">
+  <view class="result-content" wx:if="{{resultData && resultData.type === 'health'}}">
+    <view class="calc-result-card">
       <block wx:if="{{resultData.toolId === 'bmi'}}">
         <view class="bmi-result">
           <view class="bmi-value-wrap">
@@ -423,45 +422,45 @@
     </view>
   </view>
 
-  <view class="result-content card" wx:if="{{resultData && resultData.type === 'efficiency'}}">
-    <view class="card-body">
-      <block wx:if="{{resultData.toolId === 'word-count'}}">
-        <view class="word-count-grid">
-          <view class="wc-item">
-            <view class="wc-number">{{resultData.data.charCount}}</view>
-            <view class="wc-label">总字符数</view>
-          </view>
-          <view class="wc-item">
-            <view class="wc-number">{{resultData.data.charCountNoSpace}}</view>
-            <view class="wc-label">不含空格</view>
-          </view>
-          <view class="wc-item">
-            <view class="wc-number">{{resultData.data.chineseCount}}</view>
-            <view class="wc-label">中文字符</view>
-          </view>
-          <view class="wc-item">
-            <view class="wc-number">{{resultData.data.englishCount}}</view>
-            <view class="wc-label">英文字符</view>
-          </view>
-          <view class="wc-item">
-            <view class="wc-number">{{resultData.data.numberCount}}</view>
-            <view class="wc-label">数字字符</view>
-          </view>
-          <view class="wc-item">
-            <view class="wc-number">{{resultData.data.lineCount}}</view>
-            <view class="wc-label">行数</view>
-          </view>
-          <view class="wc-item wc-item-wide">
-            <view class="wc-number">{{resultData.data.paragraphCount}}</view>
-            <view class="wc-label">段落数</view>
-          </view>
+  <view class="result-content" wx:if="{{resultData && resultData.type === 'efficiency'}}">
+    <block wx:if="{{resultData.toolId === 'word-count'}}">
+      <view class="word-count-grid">
+        <view class="wc-item">
+          <view class="wc-number">{{resultData.data.charCount}}</view>
+          <view class="wc-label">总字符数</view>
         </view>
-        <button class="btn-outline mt-30" bindtap="onCopyAll">
-          复制统计结果
-        </button>
-      </block>
+        <view class="wc-item">
+          <view class="wc-number">{{resultData.data.charCountNoSpace}}</view>
+          <view class="wc-label">不含空格</view>
+        </view>
+        <view class="wc-item">
+          <view class="wc-number">{{resultData.data.chineseCount}}</view>
+          <view class="wc-label">中文字符</view>
+        </view>
+        <view class="wc-item">
+          <view class="wc-number">{{resultData.data.englishCount}}</view>
+          <view class="wc-label">英文字符</view>
+        </view>
+        <view class="wc-item">
+          <view class="wc-number">{{resultData.data.numberCount}}</view>
+          <view class="wc-label">数字字符</view>
+        </view>
+        <view class="wc-item">
+          <view class="wc-number">{{resultData.data.lineCount}}</view>
+          <view class="wc-label">行数</view>
+        </view>
+        <view class="wc-item wc-item-wide">
+          <view class="wc-number">{{resultData.data.paragraphCount}}</view>
+          <view class="wc-label">段落数</view>
+        </view>
+      </view>
+      <button class="btn-outline mt-30" bindtap="onCopyAll">
+        复制统计结果
+      </button>
+    </block>
 
-      <block wx:elif="{{resultData.toolId === 'date-calc'}}">
+    <block wx:elif="{{resultData.toolId === 'date-calc'}}">
+      <view class="calc-result-card">
         <block wx:if="{{resultData.data.calcType === 'diff'}}">
           <view class="date-result">
             <view class="date-row">
@@ -506,8 +505,8 @@
             </view>
           </view>
         </block>
-      </block>
-    </view>
+      </view>
+    </block>
   </view>
 
   <view class="disclaimer" wx:if="{{disclaimer}}">
