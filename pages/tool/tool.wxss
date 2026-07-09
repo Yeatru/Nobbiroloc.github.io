@@ -123,8 +123,9 @@
   align-items: flex-start;
   background-color: #fff9e6;
   border-radius: 12rpx;
-  padding: 20rpx 24rpx;
+  padding: 24rpx;
   margin-top: 20rpx;
+  box-sizing: border-box;
 }
 
 .disclaimer-icon {
@@ -134,9 +135,11 @@
 }
 
 .disclaimer-text {
-  font-size: 22rpx;
+  font-size: 24rpx;
   color: #996600;
-  line-height: 1.5;
+  line-height: 1.6;
+  flex: 1;
+  word-break: break-all;
 }
 
 .zodiac-grid {
