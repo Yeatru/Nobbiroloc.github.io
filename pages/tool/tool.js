@@ -442,7 +442,7 @@ Page({
     }
 
     switch (toolId) {
-      case 'tax':
+      case 'tax': {
         const threshold = 5000
         const taxable = Math.max(0, amount - threshold)
         let tax = 0
@@ -464,7 +464,8 @@ Page({
           suggestion: '以上为月度个税估算，未包含专项附加扣除'
         }
         break
-      case 'mortgage':
+      }
+      case 'mortgage': {
         const rate = 0.042
         const years = 30
         const months = years * 12
@@ -482,7 +483,8 @@ Page({
           suggestion: '以上为等额本息估算，实际以银行审批为准'
         }
         break
-      case 'fund':
+      }
+      case 'fund': {
         const monthlyInvest = 1000
         const annualRate = 0.08
         const years = 10
@@ -501,7 +503,8 @@ Page({
           suggestion: '以上为复利估算，实际收益因市场波动会有差异'
         }
         break
-      case 'exchange':
+      }
+      case 'exchange': {
         const rateUSD = 7.25
         const rateEUR = 7.85
         const rateJPY = 0.048
@@ -518,7 +521,8 @@ Page({
           suggestion: '汇率为模拟参考值，实际以银行实时汇率为准'
         }
         break
-      case 'prepay-mortgage':
+      }
+      case 'prepay-mortgage': {
         const { loanAmount: prepayLoan, years: prepayYears, rate: prepayRate, prepayAmount, paidMonths } = this.data.selectedOptions
         const loanAmt = (prepayLoan || amount) * 10000
         const yrs = parseFloat(prepayYears) || 30
@@ -557,7 +561,8 @@ Page({
           suggestion: '以上为等额本息估算，实际以银行为准，建议提前咨询银行违约金政策'
         }
         break
-      case 'fuel-calc':
+      }
+      case 'fuel-calc': {
         const { distance, fuelPrice, fuelConsumption } = this.data.selectedOptions
         const dist = parseFloat(distance) || amount
         const price = parseFloat(fuelPrice) || 7.5
@@ -577,6 +582,7 @@ Page({
           suggestion: '以上为估算值，实际油耗受路况、驾驶习惯等因素影响'
         }
         break
+      }
     }
 
     return result
