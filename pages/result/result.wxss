@@ -1,29 +1,47 @@
 .result-page {
-  padding: 20rpx;
+  padding: 0;
   min-height: 100vh;
   box-sizing: border-box;
+}
+
+.result-header {
+  background: linear-gradient(135deg, #4A90D9 0%, #357ABD 100%);
+  padding: 60rpx 32rpx 40rpx;
+  border-radius: 0 0 48rpx 48rpx;
+  box-shadow: 0 8rpx 32rpx rgba(74, 144, 217, 0.3);
+}
+
+.result-header-title {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8rpx;
+}
+
+.result-header-desc {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.result-content {
+  padding: 24rpx;
   padding-bottom: 180rpx;
 }
 
-.result-header .card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .copy-item {
-  background-color: #f8f8f8;
-  border-radius: 12rpx;
-  padding: 24rpx;
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  padding: 32rpx;
   margin-bottom: 20rpx;
   position: relative;
+  box-shadow: 0 4rpx 24rpx rgba(0, 0, 0, 0.04);
 }
 
 .copy-text {
-  font-size: 28rpx;
-  color: #333333;
-  line-height: 1.6;
-  margin-bottom: 16rpx;
+  font-size: 30rpx;
+  color: #1e293b;
+  line-height: 1.7;
+  margin-bottom: 20rpx;
   white-space: pre-wrap;
 }
 
@@ -40,65 +58,68 @@
 }
 
 .script-title, .report-title {
-  font-size: 30rpx;
-  font-weight: 600;
-  color: #333333;
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #0f172a;
   margin-bottom: 16rpx;
+  letter-spacing: -0.5rpx;
 }
 
 .script-duration {
-  font-size: 24rpx;
-  color: #999999;
+  font-size: 26rpx;
+  color: #64748b;
   margin-bottom: 20rpx;
 }
 
 .script-scene {
-  background-color: #f8f8f8;
-  border-radius: 12rpx;
-  padding: 20rpx;
+  background-color: #f8fafc;
+  border-radius: 16rpx;
+  padding: 24rpx;
   margin-bottom: 16rpx;
+  border: 1rpx solid #e2e8f0;
 }
 
 .scene-time {
-  font-size: 24rpx;
+  font-size: 26rpx;
   color: #4A90D9;
   font-weight: 600;
-  margin-bottom: 8rpx;
-}
-
-.scene-content {
-  font-size: 26rpx;
-  color: #666666;
-  line-height: 1.5;
-}
-
-.report-section {
-  margin-bottom: 24rpx;
-}
-
-.report-section .section-title {
-  font-size: 28rpx;
-  font-weight: 600;
-  color: #333333;
   margin-bottom: 10rpx;
 }
 
+.scene-content {
+  font-size: 28rpx;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.report-section {
+  margin-bottom: 28rpx;
+}
+
+.report-section .section-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12rpx;
+}
+
 .report-section .section-content {
-  font-size: 26rpx;
-  color: #666666;
+  font-size: 28rpx;
+  color: #475569;
   line-height: 1.6;
 }
 
 .wedding-speech {
-  background-color: #fff8f0;
-  border-radius: 12rpx;
-  padding: 30rpx;
+  background: linear-gradient(135deg, #fff8f0 0%, #fef3c7 100%);
+  border-radius: 20rpx;
+  padding: 40rpx 32rpx;
+  border: 1rpx solid #fde68a;
 }
 
 .speech-text {
-  font-size: 28rpx;
-  color: #663300;
-  line-height: 1.8;
+  font-size: 30rpx;
+  color: #92400e;
+  line-height: 1.9;
   white-space: pre-wrap;
 }
 
@@ -109,50 +130,52 @@
 }
 
 .name-item {
-  background-color: #f8f8f8;
-  border-radius: 12rpx;
-  padding: 24rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 28rpx;
   text-align: center;
   position: relative;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 }
 
 .name-item.locked {
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .name-text {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: #333333;
-  margin-bottom: 8rpx;
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 10rpx;
 }
 
 .name-meaning {
-  font-size: 22rpx;
-  color: #999999;
+  font-size: 24rpx;
+  color: #64748b;
 }
 
 .name-lock {
   position: absolute;
-  top: 12rpx;
-  right: 12rpx;
-  font-size: 24rpx;
+  top: 16rpx;
+  right: 16rpx;
+  font-size: 28rpx;
 }
 
 .name-tip {
   text-align: center;
-  font-size: 22rpx;
-  color: #999999;
-  margin-top: 20rpx;
+  font-size: 24rpx;
+  color: #94a3b8;
+  margin-top: 24rpx;
 }
 
 .image-preview {
   position: relative;
   width: 100%;
   aspect-ratio: 1;
-  background-color: #f8f8f8;
-  border-radius: 12rpx;
+  background-color: #f8fafc;
+  border-radius: 20rpx;
   overflow: hidden;
+  box-shadow: 0 4rpx 24rpx rgba(0, 0, 0, 0.06);
 }
 
 .preview-img {
@@ -162,28 +185,35 @@
 
 .preview-badge {
   position: absolute;
-  top: 16rpx;
-  left: 16rpx;
-  background-color: rgba(0, 0, 0, 0.6);
+  top: 20rpx;
+  left: 20rpx;
+  background-color: rgba(0, 0, 0, 0.7);
   color: #ffffff;
-  font-size: 22rpx;
-  padding: 6rpx 16rpx;
-  border-radius: 20rpx;
+  font-size: 24rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 24rpx;
 }
 
 .image-tip {
   text-align: center;
-  font-size: 24rpx;
-  color: #999999;
-  margin-top: 20rpx;
+  font-size: 26rpx;
+  color: #64748b;
+  margin-top: 24rpx;
+}
+
+.calc-result-card {
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 24rpx rgba(0, 0, 0, 0.04);
 }
 
 .calc-result-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20rpx 0;
-  border-bottom: 1rpx solid #f0f0f0;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #f1f5f9;
 }
 
 .calc-result-row:last-of-type {
@@ -191,64 +221,67 @@
 }
 
 .calc-label {
-  font-size: 28rpx;
-  color: #666666;
+  font-size: 30rpx;
+  color: #64748b;
 }
 
 .calc-value {
-  font-size: 28rpx;
-  color: #333333;
-  font-weight: 500;
+  font-size: 30rpx;
+  color: #0f172a;
+  font-weight: 600;
 }
 
 .calc-suggestion {
-  background-color: #f0f7ff;
-  border-radius: 12rpx;
-  padding: 20rpx;
+  background-color: #f0f9ff;
+  border-radius: 16rpx;
+  padding: 24rpx;
   margin-top: 24rpx;
-  font-size: 24rpx;
-  color: #4A90D9;
-  line-height: 1.5;
+  font-size: 26rpx;
+  color: #0369a1;
+  line-height: 1.6;
+  border: 1rpx solid #e0f2fe;
 }
 
 .exchange-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16rpx 0;
-  border-bottom: 1rpx solid #f0f0f0;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f1f5f9;
 }
 
 .exchange-currency {
-  font-size: 26rpx;
-  color: #666666;
+  font-size: 28rpx;
+  color: #64748b;
 }
 
 .exchange-amount {
-  font-size: 28rpx;
-  color: #333333;
-  font-weight: 500;
+  font-size: 30rpx;
+  color: #0f172a;
+  font-weight: 600;
 }
 
 .disclaimer {
   display: flex;
   align-items: flex-start;
-  background-color: #fff9e6;
-  border-radius: 12rpx;
-  padding: 20rpx 24rpx;
-  margin-top: 20rpx;
+  background-color: #fffbeb;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-top: 24rpx;
+  border: 1rpx solid #fef3c7;
 }
 
 .disclaimer-icon {
-  font-size: 28rpx;
-  margin-right: 12rpx;
+  font-size: 32rpx;
+  margin-right: 16rpx;
   flex-shrink: 0;
 }
 
 .disclaimer-text {
-  font-size: 22rpx;
-  color: #996600;
-  line-height: 1.5;
+  font-size: 26rpx;
+  color: #92400e;
+  line-height: 1.6;
+  flex: 1;
 }
 
 .action-buttons {
@@ -258,10 +291,11 @@
   right: 0;
   display: flex;
   gap: 20rpx;
-  padding: 20rpx;
-  background-color: #ffffff;
-  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
-  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  padding: 24rpx;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20rpx);
+  box-shadow: 0 -4rpx 24rpx rgba(0, 0, 0, 0.06);
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
 }
 
 .action-btn {
@@ -274,61 +308,68 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 620rpx;
+  width: 640rpx;
   background-color: #ffffff;
-  border-radius: 24rpx;
+  border-radius: 32rpx;
   overflow: hidden;
   z-index: 10001;
+  box-shadow: 0 16rpx 64rpx rgba(0, 0, 0, 0.15);
 }
 
 .unlock-close {
   position: absolute;
-  top: 20rpx;
+  top: 24rpx;
   right: 28rpx;
-  font-size: 44rpx;
-  color: #999999;
+  font-size: 48rpx;
+  color: #94a3b8;
   line-height: 1;
   z-index: 1;
 }
 
 .unlock-header {
   text-align: center;
-  padding: 50rpx 40rpx 30rpx;
+  padding: 56rpx 40rpx 32rpx;
 }
 
 .unlock-icon {
-  font-size: 80rpx;
-  margin-bottom: 16rpx;
+  font-size: 88rpx;
+  margin-bottom: 20rpx;
 }
 
 .unlock-title {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: #333333;
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #0f172a;
   margin-bottom: 12rpx;
 }
 
 .unlock-desc {
-  font-size: 24rpx;
-  color: #999999;
+  font-size: 26rpx;
+  color: #64748b;
   line-height: 1.5;
 }
 
 .unlock-options {
-  padding: 0 32rpx 20rpx;
+  padding: 0 32rpx 24rpx;
 }
 
 .unlock-option {
   display: flex;
   align-items: center;
-  background-color: #f8f8f8;
-  border-radius: 16rpx;
-  padding: 28rpx 24rpx;
-  margin-bottom: 20rpx;
+  background-color: #f8fafc;
+  border-radius: 20rpx;
+  padding: 32rpx 28rpx;
+  margin-bottom: 16rpx;
+  transition: all 0.3s ease;
+}
+
+.unlock-option:active {
+  transform: scale(0.98);
+  background-color: #f1f5f9;
 }
 
 .option-icon {
-  font-size: 48rpx;
+  font-size: 56rpx;
   margin-right: 20rpx;
 }
 
@@ -337,56 +378,56 @@
 }
 
 .option-title {
-  font-size: 28rpx;
-  font-weight: 500;
-  color: #333333;
-  margin-bottom: 6rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 8rpx;
 }
 
 .option-desc {
-  font-size: 22rpx;
-  color: #999999;
+  font-size: 24rpx;
+  color: #64748b;
 }
 
 .option-arrow {
-  font-size: 32rpx;
-  color: #cccccc;
+  font-size: 36rpx;
+  color: #cbd5e1;
 }
 
 .unlock-tip {
   text-align: center;
-  font-size: 22rpx;
-  color: #bbbbbb;
-  padding: 20rpx 32rpx 32rpx;
+  font-size: 24rpx;
+  color: #94a3b8;
+  padding: 24rpx 32rpx 32rpx;
 }
 
 .horoscope-result {
-  padding: 10rpx 0;
+  padding: 16rpx 0;
 }
 
 .horoscope-header {
   text-align: center;
-  padding: 20rpx 0 30rpx;
-  border-bottom: 1rpx solid #f0f0f0;
-  margin-bottom: 24rpx;
+  padding: 24rpx 0 36rpx;
+  border-bottom: 1rpx solid #f1f5f9;
+  margin-bottom: 28rpx;
 }
 
 .horoscope-zodiac {
-  font-size: 36rpx;
-  font-weight: 600;
-  color: #333333;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #0f172a;
   margin-bottom: 8rpx;
 }
 
 .horoscope-date {
-  font-size: 24rpx;
-  color: #999999;
+  font-size: 26rpx;
+  color: #64748b;
 }
 
 .horoscope-score-row {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 30rpx;
+  margin-bottom: 36rpx;
 }
 
 .score-item {
@@ -394,40 +435,41 @@
 }
 
 .score-label {
-  font-size: 24rpx;
-  color: #666666;
-  margin-bottom: 8rpx;
+  font-size: 26rpx;
+  color: #64748b;
+  margin-bottom: 12rpx;
 }
 
 .score-stars {
-  font-size: 28rpx;
-  color: #FFB800;
+  font-size: 32rpx;
+  color: #f59e0b;
 }
 
 .horoscope-section {
-  margin-bottom: 24rpx;
+  margin-bottom: 28rpx;
 }
 
 .section-title-small {
-  font-size: 26rpx;
-  font-weight: 600;
-  color: #333333;
-  margin-bottom: 10rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12rpx;
 }
 
 .section-text {
-  font-size: 26rpx;
-  color: #666666;
+  font-size: 28rpx;
+  color: #475569;
   line-height: 1.6;
 }
 
 .horoscope-lucky {
   display: flex;
   justify-content: space-around;
-  background-color: #f8f8f8;
-  border-radius: 12rpx;
-  padding: 20rpx;
-  margin-top: 20rpx;
+  background-color: #f8fafc;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-top: 24rpx;
+  border: 1rpx solid #e2e8f0;
 }
 
 .lucky-item {
@@ -437,146 +479,152 @@
 }
 
 .lucky-label {
-  font-size: 22rpx;
-  color: #999999;
-  margin-bottom: 6rpx;
+  font-size: 24rpx;
+  color: #64748b;
+  margin-bottom: 8rpx;
 }
 
 .lucky-value {
-  font-size: 26rpx;
+  font-size: 28rpx;
   color: #4A90D9;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .poem-result {
   background: linear-gradient(135deg, #fef9f3 0%, #fdf3e7 100%);
-  border-radius: 16rpx;
-  padding: 40rpx 30rpx;
+  border-radius: 24rpx;
+  padding: 48rpx 32rpx;
   text-align: center;
+  border: 1rpx solid #fde68a;
 }
 
 .poem-title {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: #663300;
-  margin-bottom: 30rpx;
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #92400e;
+  margin-bottom: 36rpx;
 }
 
 .poem-lines {
-  margin-bottom: 30rpx;
+  margin-bottom: 36rpx;
 }
 
 .poem-line {
-  font-size: 30rpx;
-  color: #663300;
-  line-height: 2.2;
-  letter-spacing: 4rpx;
+  font-size: 34rpx;
+  color: #78350f;
+  line-height: 2.4;
+  letter-spacing: 6rpx;
 }
 
 .poem-author {
-  font-size: 24rpx;
-  color: #996633;
+  font-size: 26rpx;
+  color: #a16207;
 }
 
 .calc-divider {
   height: 1rpx;
-  background-color: #f0f0f0;
-  margin: 10rpx 0;
+  background-color: #f1f5f9;
+  margin: 16rpx 0;
 }
 
 .bmi-result {
   text-align: center;
-  padding: 20rpx 0 30rpx;
-  border-bottom: 1rpx solid #f0f0f0;
-  margin-bottom: 20rpx;
+  padding: 24rpx 0 40rpx;
+  border-bottom: 1rpx solid #f1f5f9;
+  margin-bottom: 28rpx;
 }
 
 .bmi-value-wrap {
-  margin-bottom: 16rpx;
+  margin-bottom: 20rpx;
 }
 
 .bmi-number {
-  font-size: 72rpx;
+  font-size: 80rpx;
   font-weight: 700;
   color: #4A90D9;
   line-height: 1.2;
 }
 
 .bmi-label {
-  font-size: 24rpx;
-  color: #999999;
+  font-size: 26rpx;
+  color: #64748b;
 }
 
 .bmi-status {
   display: inline-block;
-  padding: 8rpx 30rpx;
-  border-radius: 30rpx;
-  font-size: 26rpx;
-  font-weight: 500;
-  margin-bottom: 30rpx;
+  padding: 12rpx 36rpx;
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  margin-bottom: 36rpx;
 }
 
 .bmi-status.status-1 {
-  background-color: #e3f2fd;
-  color: #1976d2;
+  background-color: #e0f2fe;
+  color: #0284c7;
 }
 
 .bmi-status.status-2 {
-  background-color: #e8f5e9;
-  color: #388e3c;
+  background-color: #dcfce7;
+  color: #16a34a;
 }
 
 .bmi-status.status-3 {
-  background-color: #fff3e0;
-  color: #f57c00;
+  background-color: #fef3c7;
+  color: #d97706;
 }
 
 .bmi-status.status-4 {
-  background-color: #ffebee;
-  color: #d32f2f;
+  background-color: #fee2e2;
+  color: #dc2626;
 }
 
 .bmi-range-row {
   display: flex;
   justify-content: space-between;
-  background-color: #f5f5f5;
-  border-radius: 12rpx;
-  padding: 16rpx 10rpx;
+  background-color: #f8fafc;
+  border-radius: 16rpx;
+  padding: 20rpx 16rpx;
+  border: 1rpx solid #e2e8f0;
 }
 
 .bmi-range-item {
   flex: 1;
   text-align: center;
-  font-size: 22rpx;
-  color: #999999;
+  font-size: 24rpx;
+  color: #64748b;
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: all 0.3s ease;
+  padding: 8rpx 0;
+  border-radius: 12rpx;
 }
 
 .bmi-range-item .range-desc {
-  font-size: 18rpx;
-  margin-top: 4rpx;
+  font-size: 20rpx;
+  margin-top: 6rpx;
 }
 
 .bmi-range-item.active {
   color: #4A90D9;
   font-weight: 600;
+  background-color: rgba(74, 144, 217, 0.08);
 }
 
 .word-count-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16rpx;
-  margin-bottom: 10rpx;
+  margin-bottom: 16rpx;
 }
 
 .wc-item {
-  background-color: #f8f8f8;
-  border-radius: 12rpx;
-  padding: 24rpx 10rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 28rpx 16rpx;
   text-align: center;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 }
 
 .wc-item.wc-item-wide {
@@ -584,68 +632,92 @@
 }
 
 .wc-number {
-  font-size: 36rpx;
-  font-weight: 600;
+  font-size: 40rpx;
+  font-weight: 700;
   color: #4A90D9;
-  margin-bottom: 6rpx;
+  margin-bottom: 8rpx;
 }
 
 .wc-label {
-  font-size: 22rpx;
-  color: #999999;
+  font-size: 24rpx;
+  color: #64748b;
 }
 
 .date-result {
-  padding: 10rpx 0;
+  padding: 16rpx 0;
 }
 
 .date-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16rpx 0;
+  padding: 20rpx 0;
 }
 
 .date-label {
-  font-size: 28rpx;
-  color: #666666;
+  font-size: 30rpx;
+  color: #64748b;
 }
 
 .date-value {
-  font-size: 28rpx;
-  color: #333333;
-  font-weight: 500;
+  font-size: 30rpx;
+  color: #0f172a;
+  font-weight: 600;
 }
 
 .date-divider {
   height: 1rpx;
-  background-color: #f0f0f0;
-  margin: 20rpx 0;
+  background-color: #f1f5f9;
+  margin: 24rpx 0;
 }
 
 .date-result-main {
   text-align: center;
-  padding: 30rpx 0;
+  padding: 40rpx 0;
+  background-color: #f8fafc;
+  border-radius: 20rpx;
+  margin-bottom: 24rpx;
 }
 
 .days-diff, .result-date {
-  font-size: 56rpx;
+  font-size: 64rpx;
   font-weight: 700;
   color: #4A90D9;
-  margin-bottom: 10rpx;
+  margin-bottom: 12rpx;
 }
 
 .days-label {
-  font-size: 24rpx;
-  color: #999999;
+  font-size: 26rpx;
+  color: #64748b;
 }
 
 .date-extra {
   display: flex;
   justify-content: space-around;
-  background-color: #f8f8f8;
-  border-radius: 12rpx;
-  padding: 20rpx;
-  font-size: 24rpx;
-  color: #666666;
+  background-color: #f8fafc;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  font-size: 26rpx;
+  color: #475569;
+  border: 1rpx solid #e2e8f0;
+}
+
+.exchange-card {
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 24rpx rgba(0, 0, 0, 0.04);
+}
+
+.exchange-header {
+  font-size: 26rpx;
+  color: #64748b;
+  margin-bottom: 20rpx;
+}
+
+.exchange-amount-big {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 24rpx;
 }

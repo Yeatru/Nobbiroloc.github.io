@@ -246,6 +246,13 @@
   align-items: center;
   color: #1e293b;
   font-size: 30rpx;
+  min-height: 96rpx;
+  background-color: #f8fafc;
+  border-radius: 16rpx;
+  padding: 0 28rpx;
+  border: 2rpx solid #e2e8f0;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .picker-field:empty::after {

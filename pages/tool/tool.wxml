@@ -311,12 +311,12 @@
             <block wx:if="{{selectedOptions.calcType !== 'add'}}">
               <view class="input-tip">选择两个日期</view>
               <picker mode="date" value="{{selectedOptions.date1}}" data-field="date1" bindchange="onDateChange">
-                <view class="input-field picker-field">
+                <view class="picker-field">
                   {{selectedOptions.date1 || '选择开始日期'}}
                 </view>
               </picker>
               <picker mode="date" value="{{selectedOptions.date2}}" data-field="date2" bindchange="onDateChange">
-                <view class="input-field picker-field mt-20">
+                <view class="picker-field mt-20">
                   {{selectedOptions.date2 || '选择结束日期'}}
                 </view>
               </picker>
@@ -325,7 +325,7 @@
             <block wx:else>
               <view class="input-tip">起始日期</view>
               <picker mode="date" value="{{selectedOptions.date1}}" data-field="date1" bindchange="onDateChange">
-                <view class="input-field picker-field">
+                <view class="picker-field">
                   {{selectedOptions.date1 || '选择起始日期'}}
                 </view>
               </picker>

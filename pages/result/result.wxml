@@ -1,169 +1,163 @@
 <view class="result-page">
-  <view class="result-header card" wx:if="{{resultData}}">
-    <view class="card-header">
-      <view class="card-header-title">{{resultData.toolName}}</view>
-      <view class="tag tag-primary">免费</view>
-    </view>
+  <view class="result-header" wx:if="{{resultData}}">
+    <view class="result-header-title">{{resultData.toolName}}</view>
+    <view class="result-header-desc">计算结果</view>
   </view>
 
-  <view class="result-content card" wx:if="{{resultData && resultData.type === 'copy'}}">
-    <view class="card-body">
-      <block wx:if="{{resultData.toolId === 'moments'}}">
-        <view
-          class="copy-item"
-          wx:for="{{resultData.results}}"
-          wx:key="index"
+  <view class="result-content" wx:if="{{resultData && resultData.type === 'copy'}}">
+    <block wx:if="{{resultData.toolId === 'moments'}}">
+      <view
+        class="copy-item"
+        wx:for="{{resultData.results}}"
+        wx:key="index"
+      >
+        <view class="copy-text">{{item}}</view>
+        <button
+          class="btn-outline copy-btn"
+          size="mini"
+          data-text="{{item}}"
+          bindtap="onCopy"
         >
-          <view class="copy-text">{{item}}</view>
-          <button
-            class="btn-outline copy-btn"
-            size="mini"
-            data-text="{{item}}"
-            bindtap="onCopy"
-          >
-            复制
-          </button>
-        </view>
-      </block>
+          复制
+        </button>
+      </view>
+    </block>
 
-      <block wx:elif="{{resultData.toolId === 'video-script'}}">
-        <view wx:for="{{resultData.results}}" wx:key="title" class="script-item">
-          <view class="script-title">{{item.title}}</view>
-          <view class="script-duration">时长：{{item.duration}}</view>
-          <view
-            class="script-scene"
-            wx:for="{{item.scenes}}"
-            wx:for-item="scene"
-            wx:key="time"
-          >
-            <view class="scene-time">{{scene.time}}</view>
-            <view class="scene-content">{{scene.content}}</view>
-          </view>
+    <block wx:elif="{{resultData.toolId === 'video-script'}}">
+      <view wx:for="{{resultData.results}}" wx:key="title" class="script-item">
+        <view class="script-title">{{item.title}}</view>
+        <view class="script-duration">时长：{{item.duration}}</view>
+        <view
+          class="script-scene"
+          wx:for="{{item.scenes}}"
+          wx:for-item="scene"
+          wx:key="time"
+        >
+          <view class="scene-time">{{scene.time}}</view>
+          <view class="scene-content">{{scene.content}}</view>
         </view>
-      </block>
+      </view>
+    </block>
 
-      <block wx:elif="{{resultData.toolId === 'work-report'}}">
-        <view wx:for="{{resultData.results}}" wx:key="title" class="report-item">
-          <view class="report-title">{{item.title}}</view>
-          <view
-            class="report-section"
-            wx:for="{{item.sections}}"
-            wx:for-item="section"
-            wx:key="title"
-          >
-            <view class="section-title">{{section.title}}</view>
-            <view class="section-content">{{section.content}}</view>
-          </view>
+    <block wx:elif="{{resultData.toolId === 'work-report'}}">
+      <view wx:for="{{resultData.results}}" wx:key="title" class="report-item">
+        <view class="report-title">{{item.title}}</view>
+        <view
+          class="report-section"
+          wx:for="{{item.sections}}"
+          wx:for-item="section"
+          wx:key="title"
+        >
+          <view class="section-title">{{section.title}}</view>
+          <view class="section-content">{{section.content}}</view>
         </view>
-      </block>
+      </view>
+    </block>
 
-      <block wx:elif="{{resultData.toolId === 'wedding'}}">
-        <view class="wedding-speech">
-          <view class="speech-text">{{resultData.results[0]}}</view>
+    <block wx:elif="{{resultData.toolId === 'wedding'}}">
+      <view class="wedding-speech">
+        <view class="speech-text">{{resultData.results[0]}}</view>
+      </view>
+    </block>
+
+    <block wx:elif="{{resultData.toolId === 'name-generator'}}">
+      <view class="name-list">
+        <view
+          class="name-item {{!item.isFree ? 'locked' : ''}}"
+          wx:for="{{resultData.results}}"
+          wx:key="name"
+        >
+          <view class="name-text">{{item.name}}</view>
+          <view class="name-meaning">{{item.meaning}}</view>
+          <view class="name-lock" wx:if="{{!item.isFree}}">🔒</view>
         </view>
-      </block>
+      </view>
+      <view class="name-tip">仅展示前3个免费名字，解锁查看更多</view>
+    </block>
 
-      <block wx:elif="{{resultData.toolId === 'name-generator'}}">
-        <view class="name-list">
-          <view
-            class="name-item {{!item.isFree ? 'locked' : ''}}"
-            wx:for="{{resultData.results}}"
-            wx:key="name"
-          >
-            <view class="name-text">{{item.name}}</view>
-            <view class="name-meaning">{{item.meaning}}</view>
-            <view class="name-lock" wx:if="{{!item.isFree}}">🔒</view>
-          </view>
+    <block wx:elif="{{resultData.toolId === 'horoscope'}}">
+      <view class="horoscope-result">
+        <view class="horoscope-header">
+          <view class="horoscope-zodiac">{{resultData.results.zodiac}}</view>
+          <view class="horoscope-date">{{resultData.results.date}}</view>
         </view>
-        <view class="name-tip">仅展示前3个免费名字，解锁查看更多</view>
-      </block>
-
-      <block wx:elif="{{resultData.toolId === 'horoscope'}}">
-        <view class="horoscope-result">
-          <view class="horoscope-header">
-            <view class="horoscope-zodiac">{{resultData.results.zodiac}}</view>
-            <view class="horoscope-date">{{resultData.results.date}}</view>
+        <view class="horoscope-score-row">
+          <view class="score-item">
+            <view class="score-label">综合运势</view>
+            <view class="score-stars">{{resultData.results.overallStar}}</view>
           </view>
-          <view class="horoscope-score-row">
-            <view class="score-item">
-              <view class="score-label">综合运势</view>
-              <view class="score-stars">{{resultData.results.overallStar}}</view>
-            </view>
-            <view class="score-item">
-              <view class="score-label">爱情运势</view>
-              <view class="score-stars">{{resultData.results.loveStar}}</view>
-            </view>
-            <view class="score-item">
-              <view class="score-label">事业运势</view>
-              <view class="score-stars">{{resultData.results.careerStar}}</view>
-            </view>
+          <view class="score-item">
+            <view class="score-label">爱情运势</view>
+            <view class="score-stars">{{resultData.results.loveStar}}</view>
           </view>
-          <view class="horoscope-section">
-            <view class="section-title-small">整体运势</view>
-            <view class="section-text">{{resultData.results.overall}}</view>
-          </view>
-          <view class="horoscope-section">
-            <view class="section-title-small">爱情运势</view>
-            <view class="section-text">{{resultData.results.love}}</view>
-          </view>
-          <view class="horoscope-section">
-            <view class="section-title-small">事业运势</view>
-            <view class="section-text">{{resultData.results.career}}</view>
-          </view>
-          <view class="horoscope-section">
-            <view class="section-title-small">财运指数</view>
-            <view class="section-text">{{resultData.results.wealth}}</view>
-          </view>
-          <view class="horoscope-section">
-            <view class="section-title-small">健康运势</view>
-            <view class="section-text">{{resultData.results.health}}</view>
-          </view>
-          <view class="horoscope-lucky">
-            <view class="lucky-item">
-              <text class="lucky-label">幸运颜色</text>
-              <text class="lucky-value">{{resultData.results.luckyColor}}</text>
-            </view>
-            <view class="lucky-item">
-              <text class="lucky-label">幸运数字</text>
-              <text class="lucky-value">{{resultData.results.luckyNumber}}</text>
-            </view>
+          <view class="score-item">
+            <view class="score-label">事业运势</view>
+            <view class="score-stars">{{resultData.results.careerStar}}</view>
           </view>
         </view>
-      </block>
-
-      <block wx:elif="{{resultData.toolId === 'acrostic-poem'}}">
-        <view class="poem-result">
-          <view class="poem-title">{{resultData.results.title}}</view>
-          <view class="poem-lines">
-            <view class="poem-line" wx:for="{{resultData.results.lines}}" wx:key="index">
-              {{item}}
-            </view>
-          </view>
-          <view class="poem-author">—— {{resultData.results.author}}</view>
+        <view class="horoscope-section">
+          <view class="section-title-small">整体运势</view>
+          <view class="section-text">{{resultData.results.overall}}</view>
         </view>
-      </block>
+        <view class="horoscope-section">
+          <view class="section-title-small">爱情运势</view>
+          <view class="section-text">{{resultData.results.love}}</view>
+        </view>
+        <view class="horoscope-section">
+          <view class="section-title-small">事业运势</view>
+          <view class="section-text">{{resultData.results.career}}</view>
+        </view>
+        <view class="horoscope-section">
+          <view class="section-title-small">财运指数</view>
+          <view class="section-text">{{resultData.results.wealth}}</view>
+        </view>
+        <view class="horoscope-section">
+          <view class="section-title-small">健康运势</view>
+          <view class="section-text">{{resultData.results.health}}</view>
+        </view>
+        <view class="horoscope-lucky">
+          <view class="lucky-item">
+            <text class="lucky-label">幸运颜色</text>
+            <text class="lucky-value">{{resultData.results.luckyColor}}</text>
+          </view>
+          <view class="lucky-item">
+            <text class="lucky-label">幸运数字</text>
+            <text class="lucky-value">{{resultData.results.luckyNumber}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
 
-      <button class="btn-primary mt-30" bindtap="onCopyAll">
-        一键复制全部
-      </button>
-    </view>
+    <block wx:elif="{{resultData.toolId === 'acrostic-poem'}}">
+      <view class="poem-result">
+        <view class="poem-title">{{resultData.results.title}}</view>
+        <view class="poem-lines">
+          <view class="poem-line" wx:for="{{resultData.results.lines}}" wx:key="index">
+            {{item}}
+          </view>
+        </view>
+        <view class="poem-author">—— {{resultData.results.author}}</view>
+      </view>
+    </block>
+
+    <button class="btn-primary mt-30" bindtap="onCopyAll">
+      一键复制全部
+    </button>
   </view>
 
-  <view class="result-content card" wx:if="{{resultData && resultData.type === 'image'}}">
-    <view class="card-body">
-      <view class="image-preview">
-        <image
-          class="preview-img"
-          src="{{resultData.processedImage}}"
-          mode="aspectFit"
-        />
-        <view class="preview-badge">预览</view>
-      </view>
-      <view class="image-tip">低清预览图，解锁可下载高清无水印原图</view>
-      <button class="btn-primary mt-30" bindtap="onSaveImage">
-        {{isUnlocked ? '保存高清原图' : '解锁高清下载'}}
-      </button>
+  <view class="result-content" wx:if="{{resultData && resultData.type === 'image'}}">
+    <view class="image-preview">
+      <image
+        class="preview-img"
+        src="{{resultData.processedImage}}"
+        mode="aspectFit"
+      />
+      <view class="preview-badge">预览</view>
     </view>
+    <view class="image-tip">低清预览图，解锁可下载高清无水印原图</view>
+    <button class="btn-primary mt-30" bindtap="onSaveImage">
+      {{isUnlocked ? '保存高清原图' : '解锁高清下载'}}
+    </button>
   </view>
 
   <view class="result-content card" wx:if="{{resultData && resultData.type === 'calculator'}}">
