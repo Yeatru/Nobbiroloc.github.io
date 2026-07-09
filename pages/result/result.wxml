@@ -1,0 +1,315 @@
+<view class="result-page">
+  <view class="result-header card" wx:if="{{resultData}}">
+    <view class="card-header">
+      <view class="card-header-title">{{resultData.toolName}}</view>
+      <view class="tag tag-primary">免费</view>
+    </view>
+  </view>
+
+  <view class="result-content card" wx:if="{{resultData && resultData.type === 'copy'}}">
+    <view class="card-body">
+      <block wx:if="{{resultData.toolId === 'moments'}}">
+        <view
+          class="copy-item"
+          wx:for="{{resultData.results}}"
+          wx:key="index"
+        >
+          <view class="copy-text">{{item}}</view>
+          <button
+            class="btn-outline copy-btn"
+            size="mini"
+            data-text="{{item}}"
+            bindtap="onCopy"
+          >
+            复制
+          </button>
+        </view>
+      </block>
+
+      <block wx:elif="{{resultData.toolId === 'video-script'}}">
+        <view wx:for="{{resultData.results}}" wx:key="title" class="script-item">
+          <view class="script-title">{{item.title}}</view>
+          <view class="script-duration">时长：{{item.duration}}</view>
+          <view
+            class="script-scene"
+            wx:for="{{item.scenes}}"
+            wx:for-item="scene"
+            wx:key="time"
+          >
+            <view class="scene-time">{{scene.time}}</view>
+            <view class="scene-content">{{scene.content}}</view>
+          </view>
+        </view>
+      </block>
+
+      <block wx:elif="{{resultData.toolId === 'work-report'}}">
+        <view wx:for="{{resultData.results}}" wx:key="title" class="report-item">
+          <view class="report-title">{{item.title}}</view>
+          <view
+            class="report-section"
+            wx:for="{{item.sections}}"
+            wx:for-item="section"
+            wx:key="title"
+          >
+            <view class="section-title">{{section.title}}</view>
+            <view class="section-content">{{section.content}}</view>
+          </view>
+        </view>
+      </block>
+
+      <block wx:elif="{{resultData.toolId === 'wedding'}}">
+        <view class="wedding-speech">
+          <view class="speech-text">{{resultData.results[0]}}</view>
+        </view>
+      </block>
+
+      <block wx:elif="{{resultData.toolId === 'name-generator'}}">
+        <view class="name-list">
+          <view
+            class="name-item {{!item.isFree ? 'locked' : ''}}"
+            wx:for="{{resultData.results}}"
+            wx:key="name"
+          >
+            <view class="name-text">{{item.name}}</view>
+            <view class="name-meaning">{{item.meaning}}</view>
+            <view class="name-lock" wx:if="{{!item.isFree}}">🔒</view>
+          </view>
+        </view>
+        <view class="name-tip">仅展示前3个免费名字，解锁查看更多</view>
+      </block>
+
+      <button class="btn-primary mt-30" bindtap="onCopyAll">
+        一键复制全部
+      </button>
+    </view>
+  </view>
+
+  <view class="result-content card" wx:if="{{resultData && resultData.type === 'image'}}">
+    <view class="card-body">
+      <view class="image-preview">
+        <image
+          class="preview-img"
+          src="{{resultData.processedImage}}"
+          mode="aspectFit"
+        />
+        <view class="preview-badge">预览</view>
+      </view>
+      <view class="image-tip">低清预览图，解锁可下载高清无水印原图</view>
+      <button class="btn-primary mt-30" bindtap="onSaveImage">
+        {{isUnlocked ? '保存高清原图' : '解锁高清下载'}}
+      </button>
+    </view>
+  </view>
+
+  <view class="result-content card" wx:if="{{resultData && resultData.type === 'calculator'}}">
+    <view class="card-body">
+      <block wx:if="{{resultData.toolId === 'tile'}}">
+        <view class="calc-result-row">
+          <view class="calc-label">瓷砖数量</view>
+          <view class="calc-value text-primary">{{resultData.data.tileCount}} 块</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">基础用量</view>
+          <view class="calc-value">{{resultData.data.baseCount}} 块</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">损耗量（{{resultData.data.lossRate}}%）</view>
+          <view class="calc-value">{{resultData.data.lossCount}} 块</view>
+        </view>
+        <view class="calc-suggestion">💡 {{resultData.data.suggestion}}</view>
+      </block>
+
+      <block wx:elif="{{resultData.toolId === 'paint'}}">
+        <view class="calc-result-row">
+          <view class="calc-label">涂料总量</view>
+          <view class="calc-value text-primary">{{resultData.data.totalPaint}} 升</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">购买桶数（{{resultData.data.bucketSize}}L/桶）</view>
+          <view class="calc-value">{{resultData.data.bucketCount}} 桶</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">涂刷遍数</view>
+          <view class="calc-value">{{resultData.data.coats}} 遍</view>
+        </view>
+        <view class="calc-suggestion">💡 {{resultData.data.suggestion}}</view>
+      </block>
+
+      <block wx:elif="{{resultData.toolId === 'water-electric'}}">
+        <view class="calc-result-row">
+          <view class="calc-label">预估总价</view>
+          <view class="calc-value text-primary">¥ {{resultData.data.totalCost}}</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">每平米造价</view>
+          <view class="calc-value">¥ {{resultData.data.perSquareCost}}</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">材料/人工占比</view>
+          <view class="calc-value">{{resultData.data.materialRatio}}</view>
+        </view>
+        <view class="calc-suggestion">💡 {{resultData.data.suggestion}}</view>
+      </block>
+
+      <block wx:elif="{{resultData.toolId === 'public-area'}}">
+        <view class="calc-result-row">
+          <view class="calc-label">建筑面积</view>
+          <view class="calc-value">{{resultData.data.totalArea}} ㎡</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">公摊面积</view>
+          <view class="calc-value text-danger">{{resultData.data.publicArea}} ㎡</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">套内使用面积</view>
+          <view class="calc-value text-success">{{resultData.data.usableArea}} ㎡</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">公摊率</view>
+          <view class="calc-value">{{resultData.data.publicRate}}%</view>
+        </view>
+        <view class="calc-suggestion">💡 {{resultData.data.suggestion}}</view>
+      </block>
+
+      <block wx:elif="{{resultData.toolId === 'tax'}}">
+        <view class="calc-result-row">
+          <view class="calc-label">月工资</view>
+          <view class="calc-value">¥ {{resultData.data.monthlySalary}}</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">应纳税所得额</view>
+          <view class="calc-value">¥ {{resultData.data.taxableIncome}}</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">应缴个税</view>
+          <view class="calc-value text-danger">¥ {{resultData.data.tax}}</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">税后到手</view>
+          <view class="calc-value text-success">¥ {{resultData.data.actualIncome}}</view>
+        </view>
+        <view class="calc-suggestion">💡 {{resultData.data.suggestion}}</view>
+      </block>
+
+      <block wx:elif="{{resultData.toolId === 'mortgage'}}">
+        <view class="calc-result-row">
+          <view class="calc-label">贷款金额</view>
+          <view class="calc-value">¥ {{resultData.data.loanAmount}} 万</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">贷款年限</view>
+          <view class="calc-value">{{resultData.data.years}} 年</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">年利率</view>
+          <view class="calc-value">{{resultData.data.rate}}%</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">月供</view>
+          <view class="calc-value text-primary">¥ {{resultData.data.monthlyPayment}}</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">还款总额</view>
+          <view class="calc-value">¥ {{resultData.data.totalPayment}}</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">支付利息</view>
+          <view class="calc-value text-danger">¥ {{resultData.data.totalInterest}}</view>
+        </view>
+        <view class="calc-suggestion">💡 {{resultData.data.suggestion}}</view>
+      </block>
+
+      <block wx:elif="{{resultData.toolId === 'fund'}}">
+        <view class="calc-result-row">
+          <view class="calc-label">每月定投</view>
+          <view class="calc-value">¥ {{resultData.data.monthlyInvest}}</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">投资年限</view>
+          <view class="calc-value">{{resultData.data.years}} 年</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">年化收益率</view>
+          <view class="calc-value">{{resultData.data.annualRate}}%</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">期末总值</view>
+          <view class="calc-value text-success">¥ {{resultData.data.futureValue}}</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">投入本金</view>
+          <view class="calc-value">¥ {{resultData.data.totalInvest}}</view>
+        </view>
+        <view class="calc-result-row">
+          <view class="calc-label">累计收益</view>
+          <view class="calc-value text-primary">¥ {{resultData.data.totalReturn}}</view>
+        </view>
+        <view class="calc-suggestion">💡 {{resultData.data.suggestion}}</view>
+      </block>
+
+      <block wx:elif="{{resultData.toolId === 'exchange'}}">
+        <view class="calc-result-row">
+          <view class="calc-label">兑换金额</view>
+          <view class="calc-value text-primary">¥ {{resultData.data.amount}}</view>
+        </view>
+        <view
+          class="exchange-item"
+          wx:for="{{resultData.data.rates}}"
+          wx:key="currency"
+        >
+          <view class="exchange-currency">{{item.currency}}</view>
+          <view class="exchange-amount">{{item.amount}}</view>
+        </view>
+        <view class="calc-suggestion">💡 {{resultData.data.suggestion}}</view>
+      </block>
+
+      <button class="btn-outline mt-30" bindtap="onExport">
+        {{isUnlocked ? '导出详细报表' : '解锁导出功能'}}
+      </button>
+    </view>
+  </view>
+
+  <view class="disclaimer" wx:if="{{disclaimer}}">
+    <text class="disclaimer-icon">⚠️</text>
+    <text class="disclaimer-text">{{disclaimer}}</text>
+  </view>
+
+  <view class="action-buttons">
+    <button class="btn-secondary action-btn" bindtap="onUseAgain">
+      再算一次
+    </button>
+    <button class="btn-primary action-btn" bindtap="goHome">
+      回到首页
+    </button>
+  </view>
+</view>
+
+<view class="modal-mask" wx:if="{{showUnlockModal}}" bindtap="onMaskClick">
+  <view class="unlock-modal" catchtap="stopPropagation">
+    <view class="unlock-close" bindtap="hideUnlockModal">×</view>
+    <view class="unlock-header">
+      <view class="unlock-icon">🔓</view>
+      <view class="unlock-title">解锁高清完整版</view>
+      <view class="unlock-desc">基础功能已免费使用，可通过以下任意方式解锁高清无水印导出</view>
+    </view>
+    <view class="unlock-options">
+      <view class="unlock-option" bindtap="onShareUnlock">
+        <view class="option-icon">📤</view>
+        <view class="option-info">
+          <view class="option-title">分享给好友/微信群</view>
+          <view class="option-desc">分享成功立即解锁当日权限</view>
+        </view>
+        <view class="option-arrow">›</view>
+      </view>
+      <view class="unlock-option" bindtap="onVideoUnlock">
+        <view class="option-icon">📺</view>
+        <view class="option-info">
+          <view class="option-title">观看激励视频广告</view>
+          <view class="option-desc">看完立即解锁单次权限</view>
+        </view>
+        <view class="option-arrow">›</view>
+      </view>
+    </view>
+    <view class="unlock-tip">基础功能永久免费，解锁为增值服务</view>
+  </view>
+</view>

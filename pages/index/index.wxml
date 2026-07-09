@@ -1,0 +1,113 @@
+<view class="container">
+  <view class="search-bar">
+    <view class="search-box">
+      <view class="search-icon">🔍</view>
+      <input
+        class="search-input"
+        placeholder="搜索工具，如：文案、计算器..."
+        value="{{searchKeyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearch"
+        confirm-type="search"
+      />
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">热门工具</view>
+    <view class="hot-tools-grid">
+      <view
+        class="hot-tool-item"
+        wx:for="{{hotTools}}"
+        wx:key="id"
+        data-tool-id="{{item.id}}"
+        data-tool-name="{{item.name}}"
+        data-category-id="{{item.categoryId}}"
+        data-category-name="{{item.categoryName}}"
+        bindtap="onToolClick"
+      >
+        <view class="hot-tool-icon" style="background-color: {{item.color}}20;">
+          <text class="icon-text" style="color: {{item.color}};">{{item.name.charAt(0)}}</text>
+        </view>
+        <text class="hot-tool-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">全部分类</view>
+    <view class="category-list">
+      <view
+        class="category-card"
+        wx:for="{{toolCategories}}"
+        wx:key="id"
+        data-category-id="{{item.id}}"
+        bindtap="onCategoryClick"
+      >
+        <view class="category-header">
+          <view class="category-icon" style="background-color: {{item.color}};">
+            <text class="category-icon-text">{{item.name.charAt(0)}}</text>
+          </view>
+          <view class="category-info">
+            <view class="category-name">{{item.name}}</view>
+            <view class="category-desc">{{item.desc}}</view>
+          </view>
+          <view class="category-arrow">›</view>
+        </view>
+        <view class="category-tools">
+          <view
+            class="tool-tag"
+            wx:for="{{item.children}}"
+            wx:for-item="tool"
+            wx:key="id"
+            catchtap="onToolClick"
+            data-tool-id="{{tool.id}}"
+            data-tool-name="{{tool.name}}"
+            data-category-id="{{item.id}}"
+            data-category-name="{{item.name}}"
+          >
+            {{tool.name}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="welfare-entry" bindtap="showWelfare">
+    <view class="welfare-icon">🎁</view>
+    <view class="welfare-text">
+      <view class="welfare-title">用户福利通道</view>
+      <view class="welfare-desc">进工具福利群，领取免广告兑换码</view>
+    </view>
+    <view class="welfare-arrow">›</view>
+  </view>
+
+  <view class="footer-banner">
+    <view class="banner-placeholder">
+      <text class="banner-text">广告位 - 首页底部Banner</text>
+    </view>
+  </view>
+</view>
+
+<view class="modal-mask" wx:if="{{showWelfareModal}}" bindtap="onWelfareMaskClick">
+  <view class="modal-content welfare-modal" catchtap="stopPropagation">
+    <view class="welfare-modal-header">
+      <view class="welfare-modal-title">🎁 工具福利群</view>
+      <view class="welfare-modal-close" bindtap="hideWelfareModal">×</view>
+    </view>
+    <view class="welfare-modal-body">
+      <view class="welfare-modal-desc">进群可领取每日免广告次数、免费高清导出次数</view>
+      <view class="qr-code-area">
+        <view class="qr-code-placeholder">
+          <text class="qr-icon">📱</text>
+          <text class="qr-text">微信群二维码</text>
+        </view>
+        <view class="qr-code-placeholder">
+          <text class="qr-icon">💼</text>
+          <text class="qr-text">客服二维码</text>
+        </view>
+      </view>
+      <view class="welfare-modal-tip">长按识别二维码，加入福利群</view>
+    </view>
+  </view>
+</view>

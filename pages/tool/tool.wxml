@@ -1,0 +1,174 @@
+<view class="tool-page">
+  <view class="tool-tabs" wx:if="{{!currentTool}}">
+    <view
+      class="tool-tab-item"
+      wx:for="{{toolList}}"
+      wx:key="id"
+      data-tool-id="{{item.id}}"
+      bindtap="onToolSelect"
+    >
+      <view class="tool-tab-icon">{{item.name.charAt(0)}}</view>
+      <view class="tool-tab-name">{{item.name}}</view>
+    </view>
+  </view>
+
+  <view class="tool-content" wx:if="{{currentTool}}">
+    <view class="tool-subtabs">
+      <view
+        class="tool-subtab-item {{toolId === item.id ? 'active' : ''}}"
+        wx:for="{{toolList}}"
+        wx:key="id"
+        data-tool-id="{{item.id}}"
+        bindtap="onToolSelect"
+      >
+        {{item.name}}
+      </view>
+    </view>
+
+    <view class="input-section card">
+      <view class="card-header">
+        <view class="card-header-title">{{toolName}}</view>
+      </view>
+      <view class="card-body">
+        <block wx:if="{{categoryId === 'ai-copy'}}">
+          <block wx:if="{{toolId === 'name-generator'}}">
+            <view class="input-tip">请输入姓氏或关键词（可选）</view>
+            <input
+              class="input-field"
+              placeholder="请输入姓氏，如：张、王"
+              value="{{inputValue}}"
+              bindinput="onInputChange"
+            />
+          </block>
+          <block wx:else>
+            <view class="input-tip">请输入关键词或需求描述</view>
+            <textarea
+              class="input-field textarea"
+              placeholder="请输入关键词或需求描述，如：周末出游、产品推广..."
+              value="{{inputValue}}"
+              bindinput="onInputChange"
+              maxlength="500"
+              auto-height
+            />
+          </block>
+        </block>
+
+        <block wx:if="{{categoryId === 'decor-calc'}}">
+          <block wx:if="{{toolId === 'tile'}}">
+            <view class="input-tip">请输入房间面积（平方米）</view>
+            <input
+              class="input-field"
+              type="digit"
+              placeholder="请输入面积，如：20"
+              value="{{inputValue}}"
+              bindinput="onInputChange"
+            />
+            <view class="input-desc">按600×600mm规格瓷砖计算</view>
+          </block>
+          <block wx:elif="{{toolId === 'paint'}}">
+            <view class="input-tip">请输入墙面面积（平方米）</view>
+            <input
+              class="input-field"
+              type="digit"
+              placeholder="请输入墙面面积"
+              value="{{inputValue}}"
+              bindinput="onInputChange"
+            />
+            <view class="input-desc">按涂刷2遍计算</view>
+          </block>
+          <block wx:elif="{{toolId === 'water-electric'}}">
+            <view class="input-tip">请输入房屋建筑面积（平方米）</view>
+            <input
+              class="input-field"
+              type="digit"
+              placeholder="请输入建筑面积"
+              value="{{inputValue}}"
+              bindinput="onInputChange"
+            />
+            <view class="input-desc">按每平米120元标准估算</view>
+          </block>
+          <block wx:elif="{{toolId === 'public-area'}}">
+            <view class="input-tip">请输入房屋建筑面积（平方米）</view>
+            <input
+              class="input-field"
+              type="digit"
+              placeholder="请输入建筑面积"
+              value="{{inputValue}}"
+              bindinput="onInputChange"
+            />
+            <view class="input-desc">按20%公摊率估算</view>
+          </block>
+        </block>
+
+        <block wx:if="{{categoryId === 'finance-calc'}}">
+          <block wx:if="{{toolId === 'tax'}}">
+            <view class="input-tip">请输入月工资收入（元）</view>
+            <input
+              class="input-field"
+              type="digit"
+              placeholder="请输入月工资"
+              value="{{inputValue}}"
+              bindinput="onInputChange"
+            />
+            <view class="input-desc">未包含专项附加扣除</view>
+          </block>
+          <block wx:elif="{{toolId === 'mortgage'}}">
+            <view class="input-tip">请输入贷款金额（万元）</view>
+            <input
+              class="input-field"
+              type="digit"
+              placeholder="请输入贷款金额"
+              value="{{inputValue}}"
+              bindinput="onInputChange"
+            />
+            <view class="input-desc">按30年等额本息、4.2%利率计算</view>
+          </block>
+          <block wx:elif="{{toolId === 'fund'}}">
+            <view class="input-tip">请输入每月定投金额（元）</view>
+            <input
+              class="input-field"
+              type="digit"
+              placeholder="请输入每月定投金额"
+              value="{{inputValue}}"
+              bindinput="onInputChange"
+            />
+            <view class="input-desc">按10年、年化8%收益率估算</view>
+          </block>
+          <block wx:elif="{{toolId === 'exchange'}}">
+            <view class="input-tip">请输入人民币金额（元）</view>
+            <input
+              class="input-field"
+              type="digit"
+              placeholder="请输入金额"
+              value="{{inputValue}}"
+              bindinput="onInputChange"
+            />
+            <view class="input-desc">汇率为模拟参考值</view>
+          </block>
+        </block>
+
+        <block wx:if="{{categoryId === 'ai-image'}}">
+          <view class="image-upload-area">
+            <view class="upload-icon">📷</view>
+            <view class="upload-text">点击上传图片</view>
+            <view class="upload-desc">支持JPG、PNG格式</view>
+          </view>
+        </block>
+
+        <button
+          class="btn-primary mt-30"
+          bindtap="onProcess"
+          loading="{{isProcessing}}"
+          disabled="{{isProcessing}}"
+        >
+          {{categoryId === 'ai-image' ? '上传并处理' : '立即生成'}}
+        </button>
+      </view>
+    </view>
+
+    <view class="disclaimer" wx:if="{{disclaimer}}">
+      <text class="disclaimer-icon">⚠️</text>
+      <text class="disclaimer-text">{{disclaimer}}</text>
+    </view>
+  </view>
+</view>

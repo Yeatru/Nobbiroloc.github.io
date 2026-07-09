@@ -1,0 +1,115 @@
+<view class="mine-page">
+  <view class="user-header">
+    <view class="user-avatar">👤</view>
+    <view class="user-info">
+      <view class="user-name">工具用户</view>
+      <view class="user-desc">欢迎使用全能AI工具助手</view>
+    </view>
+  </view>
+
+  <view class="unlock-status card">
+    <view class="card-body">
+      <view class="unlock-title">今日解锁状态</view>
+      <view class="unlock-info">
+        <view class="unlock-item">
+          <view class="unlock-label">分享解锁</view>
+          <view class="unlock-value {{unlockStatus.dailyShare ? 'active' : ''}}">
+            {{unlockStatus.dailyShare ? '已解锁' : '未解锁'}}
+          </view>
+        </view>
+        <view class="unlock-item">
+          <view class="unlock-label">视频解锁次数</view>
+          <view class="unlock-value">{{unlockStatus.videoCount}} / 5</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">最近使用</view>
+    <view class="records-card card" wx:if="{{usageRecords.length > 0}}">
+      <view class="card-body">
+        <view
+          class="record-item"
+          wx:for="{{usageRecords}}"
+          wx:key="id"
+          data-tool-id="{{item.toolId}}"
+          data-sub-tool-id="{{item.subToolId}}"
+          bindtap="onRecordClick"
+        >
+          <view class="record-icon">🔧</view>
+          <view class="record-info">
+            <view class="record-name">{{item.subToolName}}</view>
+            <view class="record-category">{{item.toolName}}</view>
+          </view>
+          <view class="record-arrow">›</view>
+        </view>
+      </view>
+    </view>
+    <view class="empty-card card" wx:else>
+      <view class="empty-icon">📭</view>
+      <view class="empty-text">暂无使用记录</view>
+      <view class="empty-desc">快去首页体验工具吧</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">更多</view>
+    <view class="menu-card card">
+      <view class="card-body">
+        <view
+          class="menu-item"
+          wx:for="{{menuItems}}"
+          wx:key="id"
+          data-menu-id="{{item.id}}"
+          bindtap="onMenuClick"
+        >
+          <view class="menu-icon">{{item.icon}}</view>
+          <view class="menu-info">
+            <view class="menu-name">{{item.name}}</view>
+            <view class="menu-desc">{{item.desc}}</view>
+          </view>
+          <view class="menu-arrow">›</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="welfare-entry" bindtap="showWelfare">
+    <view class="welfare-icon">🎁</view>
+    <view class="welfare-text">
+      <view class="welfare-title">用户福利通道</view>
+      <view class="welfare-desc">进工具福利群，领取免广告兑换码</view>
+    </view>
+    <view class="welfare-arrow">›</view>
+  </view>
+
+  <view class="footer-banner">
+    <view class="banner-placeholder">
+      <text class="banner-text">广告位</text>
+    </view>
+  </view>
+</view>
+
+<view class="modal-mask" wx:if="{{showWelfareModal}}" bindtap="onWelfareMaskClick">
+  <view class="modal-content welfare-modal" catchtap="stopPropagation">
+    <view class="welfare-modal-header">
+      <view class="welfare-modal-title">🎁 工具福利群</view>
+      <view class="welfare-modal-close" bindtap="hideWelfareModal">×</view>
+    </view>
+    <view class="welfare-modal-body">
+      <view class="welfare-modal-desc">进群可领取每日免广告次数、免费高清导出次数</view>
+      <view class="qr-code-area">
+        <view class="qr-code-placeholder">
+          <text class="qr-icon">📱</text>
+          <text class="qr-text">微信群二维码</text>
+        </view>
+        <view class="qr-code-placeholder">
+          <text class="qr-icon">💼</text>
+          <text class="qr-text">客服二维码</text>
+        </view>
+      </view>
+      <view class="welfare-modal-tip">长按识别二维码，加入福利群</view>
+    </view>
+  </view>
+</view>
